@@ -4,6 +4,8 @@
 
 Classical Chinese medicine treated sexual health as part of preventive medicine. A body of texts compiled between the Han and Tang dynasties (《素女经》, 《玉房秘诀》, 《素女方》, and their Japanese preservation in 《医心方》) records detailed observation of sexual physiology, arousal signals, and health practices. This project turns that scattered corpus into a browsable, single-page dashboard: classical quotations alongside modern interpretation, techniques, health practices, materia medica, and a source library.
 
+**Why open source?** In both Chinese and English, this knowledge is either vulgarized into listicles or buried in unsearchable scans and out-of-print editions. There is no structured, citable, community-maintained edition that anyone can read, correct, and extend. This project aims to be that edition — every claim traceable to a classical or modern source, every correction reviewable in public.
+
 > **Note** — Educational content on sexual health and classical medicine. Not medical advice. Designed for adult readers; contains classical artwork and non-explicit schematic silhouettes maintained separately (see [Licensing](#licensing)).
 
 ## Online demo
@@ -12,9 +14,9 @@ Live: **https://Lanren152.github.io/fangzhongshu/** (GitHub Pages, auto-deployed
 
 ## Screenshots
 
-| Dark | Light |
-|---|---|
-| ![Dark theme](assets/screenshots/hero-dark.png) | ![Light theme](assets/screenshots/hero-light.png) |
+![Dark theme](assets/screenshots/hero-dark.jpg)
+
+![Light theme](assets/screenshots/hero-light.jpg)
 
 ## What's inside
 
