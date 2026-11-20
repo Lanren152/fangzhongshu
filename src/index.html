@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<script>(function(){var t=localStorage.getItem('theme');if(!t)t='dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古代房中术 · 知识看板</title>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="aurora-bg" id="aurora-bg" aria-hidden="true"></div>
+
+<a href="#main-content" class="skip-link">跳到主内容</a>
+
+<!-- NAVIGATION -->
+<header>
+<h1 class="sr-only">古代房中术 · 知识看板</h1>
+<nav class="nav" role="navigation" aria-label="主导航">
+  <span class="nav-brand">古代房中术</span>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="菜单" aria-expanded="false">☰</button>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('overview');closeMobileNav()" aria-current="page">总览</button>
+    <button class="nav-btn" onclick="showPage('techniques');closeMobileNav()">技法库</button>
+    <button class="nav-btn" onclick="showPage('readher');closeMobileNav()">前戏·信号</button>
+    <button class="nav-btn" onclick="showPage('health');closeMobileNav()">养生处方</button>
+    <button class="nav-btn" onclick="showPage('herb');closeMobileNav()">药石辅义</button>
+    <button class="nav-btn" onclick="showPage('references');closeMobileNav()">文献典籍</button>
+  </div>
+  <div class="search-wrap" id="search-wrap">
+    <span class="search-icon" aria-hidden="true" onclick="toggleMobileSearch()">⌕</span>
+    <input type="search" class="search-input" id="global-search" placeholder="搜索体位、人物、方剂、术语…" oninput="doSearch(this.value)" onfocus="this.value&&doSearch(this.value)" onblur="setTimeout(()=>{document.getElementById('search-results').classList.remove('show');document.getElementById('search-wrap').classList.remove('expanded');document.getElementById('global-search').setAttribute('aria-expanded','false')},200)" onkeydown="searchKeydown(event)" aria-controls="search-results" aria-autocomplete="list" aria-expanded="false" aria-label="全局搜索">
+    <div class="search-results" id="search-results" role="listbox" aria-label="搜索结果"></div>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换浅色/深色模式" title="切换主题">◐</button>
+</nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="container" id="main-content">
+
+<!-- ====== PAGE 1: 总览图谱 ====== -->
+<div id="page-overview" class="page active">
+
+<canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+<div class="overview-hero">
+  <h2>房中术</h2>
+  <p class="hero-sub">——&ensp;天地有开阖，阴阳有施化，人法阴阳随四时。&ensp;——</p>
+  <div class="hero-pills">
+    <button class="hero-pill" onclick="showPage('overview', true)"><span class="hp-char">道</span><span class="hp-sep">·</span><span class="hp-label">总览</span></button>
+    <button class="hero-pill" onclick="showPage('readher', true)"><span class="hp-char">法</span><span class="hp-sep">·</span><span class="hp-label">前戏</span></button>
+    <button class="hero-pill" onclick="showPage('techniques', true)"><span class="hp-char">术</span><span class="hp-sep">·</span><span class="hp-label">技法</span></button>
+    <button class="hero-pill" onclick="showPage('health', true)"><span class="hp-char">养</span><span class="hp-sep">·</span><span class="hp-label">养生</span></button>
+    <button class="hero-pill" onclick="showPage('herb', true)"><span class="hp-char">药</span><span class="hp-sep">·</span><span class="hp-label">药石</span></button>
+    <button class="hero-pill" onclick="showPage('references', true)"><span class="hp-char">文</span><span class="hp-sep">·</span><span class="hp-label">文献</span></button>
+  </div>
+</div>
+
+</div><!-- /page-overview -->
+
+<!-- ====== PAGE 2: 技法库 ====== -->
+<div id="page-techniques" class="page">
+<h2>技法库</h2>
+<p class="section-desc">九法、八益、三十法、现代体位——可筛选、可展开详情、可并排对比。选中3个体位后点击底栏「对比」查看并排操作要领。</p>
+
+<div class="tech-toolbar">
+<div class="filter-bar" role="tablist" aria-label="体位筛选">
+  <button class="filter-chip active" role="tab" aria-selected="true" onclick="filterTechniques('all',this)">全部</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('九法',this)">九法</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('八益',this)">八益</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('三十法',this)">三十法</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('现代',this)">现代体位</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('deep',this)">深结合</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('clit',this)">阴蒂刺激</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('low-energy',this)">省力</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterTechniques('female-top',this)">女上位</button>
+</div>
+
+<div class="view-toggle" role="switch" aria-checked="false" aria-label="切换卡片/列表视图" onclick="toggleTechView(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTechView(this)}">
+  <span class="view-toggle-track">
+    <span class="view-toggle-icon view-toggle-grid active">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+    </span>
+    <span class="view-toggle-icon view-toggle-list">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="2" width="14" height="2" rx="1"/><rect x="1" y="7" width="14" height="2" rx="1"/><rect x="1" y="12" width="14" height="2" rx="1"/></svg>
+    </span>
+    <span class="view-toggle-thumb"></span>
+  </span>
+</div>
+</div>
+
+<div id="technique-grid" class="tech-groups" aria-label="体位列表">
+  <!-- Populated by JS -->
+</div>
+<div id="technique-list" hidden></div>
+</div>
+
+<!-- ====== PAGE 3: 前戏·信号 ====== -->
+<div id="page-readher" class="page">
+<h2>前戏·信号·心理</h2>
+<p class="section-desc">前戏是把身体从「平常状态」切换到「想要你」——气氛、接吻、经络爱抚、阴蒂刺激，每一步都有明确操作和信号。信号与心理则是读懂对方身体语言、用沟通建立信任，理解比技巧更重要。</p>
+
+<div class="health-tabs" role="tablist">
+  <button role="tab" aria-selected="true" class="health-tab active" onclick="switchReadherTab('foreplay',this)" aria-current="page">前戏与爱抚</button>
+  <button role="tab" aria-selected="false" class="health-tab" onclick="switchReadherTab('signals',this)">信号与心理</button>
+</div>
+
+<!-- TAB 1: 前戏与爱抚 -->
+<div id="readher-foreplay" class="health-section active">
+
+<div class="filter-bar" id="readher-filter" role="tablist" aria-label="内容筛选">
+  <button class="filter-chip active" onclick="filterReadher('all',this)">全部</button>
+  <button class="filter-chip" onclick="filterReadher('atmosphere',this)">气氛</button>
+  <button class="filter-chip" onclick="filterReadher('kiss',this)">接吻</button>
+  <button class="filter-chip" onclick="filterReadher('caress',this)">爱抚</button>
+  <button class="filter-chip" onclick="filterReadher('clit',this)">阴蒂</button>
+</div>
+
+<!-- ====== 第五章 爱抚与前戏 ====== -->
+
+<!-- ========== 一、气氛培养 ========== -->
+<h3 data-cat="atmosphere">一、气氛：看不见的前戏</h3>
+<p class="section-intro" data-cat="atmosphere">女性的性唤起依赖视觉、听觉、触觉的现实刺激，靠想象远远不够。男人的欲望在脑内自给自足，女人的欲望靠环境喂养。气氛不是加分项，是决定性能不能进入状态的前提条件。</p>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="atmosphere" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">气氛·视觉</div>
+    <div class="card-title">灯光、颜色、镜子与温度</div>
+    <div class="card-body">关主灯留辅助光源，烛光经典——不均匀的光线落在身上有呼吸感，"看得见但看不全"对双方最好。桔红、深蓝、紫、黑是公认最具性感意味的颜色。镜子可放但须征得同意。室温需暖到只穿内衣也不冷。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>金赛博士的调查里有几个数据值得男人记住。第一，女性普遍不喜欢开灯做爱。男人恰好相反，男人喜欢看到彼此交合的姿态，视觉刺激对男人的唤起作用非常大。但女性在灯火通明的房间里比较不容易达到高潮。不是故作矜持。生理层面的真实差异——强烈而直白的视觉暴露反而会分散注意力，让她们不自觉地回到紧张和自我审视的状态。</p>
+        <p>灯光的正确用法是「明暗有层次」。关掉主灯，留一到两盏低亮度的辅助光源。床头灯调到最暗档，或者直接用蜡烛。烛光经典，因为它不均匀、会晃动，光线落在身上是柔和的、有呼吸感的，该遮的地方自然隐入暗处，该突出的曲线被暖光勾勒出来。这种「看得见但看不全」的效果，对双方都是最好的，既有视觉刺激，又留了想象余地。</p>
+        <p>颜色方面，调查显示男女两性公认最具性感意味的颜色依次是：桔红色、深蓝色、紫色、黑色。桔红色给人温暖、暧昧的感觉，靠近肤色但又不是肤色。深蓝色和紫色适合营造私密感。黑色则万能，显质感、显成熟。卧室的床单、窗帘、靠垫在这些颜色上下点功夫，氛围立刻不一样。换一条深蓝色的床单、点两支桔红色的蜡烛，视觉上就已经在传递信号了。</p>
+        <p>镜子也可以利用。合适的角度放一面镜子，能看到两个人在一起的画面，对很多人来说是巨大的视觉刺激。但必须先征求对方意见，有的人不喜欢在镜子里看到自己做爱的样子。</p>
+        <p>温度也别忘了。冬天卧室太冷，两个人脱了衣服瑟瑟发抖，什么欲望都冻没了。提前开暖炉，让室温升到只穿内衣也不觉得冷的程度。温暖点燃欲火，寒冷扑灭欲火，最简单的物理常识，很多人偏偏不当回事。</p>
+        <p>还有一件事男人容易忽略：女性在交合中有一种与生俱来的矛盾心理。原始的羞怯和逃避本能始终存在，与性冲动结合后，就变成若即若离、半迎半拒的态度。她在玩欲擒故纵？不是。几百万年进化留下的本能反应而已。男人要做的，是用足够的耐心和温柔去接纳它。编织一个让她觉得安全、被渴望、被珍视的环境，这才是气氛培养的真正含义。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="atmosphere" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">气氛·听觉</div>
+    <div class="card-title">枕边语、呻吟与心跳</div>
+    <div class="card-body">枕边语三要点：具体（"刚才那动作让我快疯"而非"你好美"）、及时（动作当时立刻回应）、可以粗一点（健康关系里粗话是调味品）。呻吟是必要的声觉反馈，憋着不出声等于切断双方的感官通路。心跳声写入底层安全感，是比语言更有说服力的亲密信号。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>女性对声音的敏感度整体高于男性，尤其对音量的细微变化和音调的高低起伏，感知能力更强。耳朵也是性感带，耳垂、耳廓、耳后这片区域，神经末梢密集，被轻声说话时呼出的气拂过，或者被嘴唇含住轻吮，酥麻感会从头顶一直窜到脊椎。</p>
+        <p>枕边语有几个要点。第一，具体。「你好美」不如「刚才那个动作让我快疯了」。具体意味着真的在看、在感受，不是在背台词。第二，及时。某个动作、某个声音出来的时候立刻回应，让对方知道收到了。第三，可以粗一点。健康的关系里，偶尔的粗话是调味品，传递的是强烈的欲望，不是礼貌的赞美。</p>
+        <p>如果实在说不出口，呻吟也是一种表达。很多人在做爱时憋着不出声，怕尴尬。但适度的声音反馈是必要的，它告诉对方「你做对了」，也让自己更投入。刻意压抑声音，等于同时切断了自己和对方的一条感官通路。你不用非得说出完整的句子。一声叹息、一个吸气、一个轻轻的「嗯」，都是有效的沟通。</p>
+        <p>心跳声也值得注意。人在母亲体内最先听到的声音就是心跳，这个声音被写进了最底层的安全感里。做爱时如果耳朵贴在对方胸口，听到心跳从平稳变得急促，那种感觉比任何语言都有说服力。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="atmosphere" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">气氛·嗅觉</div>
+    <div class="card-title">体味、沐浴与房间气味</div>
+    <div class="card-body">71%的人认为体味是重要兴奋剂。三分之一女性认为体味浓的男性更性感，超半数认为麝香型最性感。女性嗅觉更灵敏，排卵期尤甚，三米外就能嗅到轻微汗味。原则：保持清洁但不消灭体味，辅助香气不盖过体香。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>一项调查显示，71%的男人和女人认为体味是重要的「兴奋剂」。这里说的体味，是每个人独特的、干净皮肤上散发出来的气味，不是汗臭味。它由皮肤表面的细菌分解分泌物形成，跟指纹一样因人而异。三分之一的女人认为体味浓的男人比体味淡的男人更性感。超过半数的人认为麝香型体味最性感。这种类似麝香的气味主要来自阴部周围和腋下腺体的分泌物。</p>
+        <p>女性的嗅觉比男性灵敏，可以嗅到三英尺外的轻微汗味。在排卵期，嗅觉会更加敏锐。你在三米开外走过来，她就已经在无意识中「闻」过你了。</p>
+        <p>最佳方案是保持清洁但不消灭体味。洗澡时不用每次都全身打满沐浴露，清水冲洗也可以。两个人一起洗个澡，不赶时间的那种，热水本身就是放松，蒸汽充满浴室，二十分钟泡下来，肌肉松弛了，心情也跟着柔软了。</p>
+        <p>房间的气味也会影响心情。天然香料比化学香水好得多，薰衣草安神、洋甘菊舒缓。但有个原则：别盖过体香。所有的辅助香气都是配角，主角永远是你们两个人身上的味道。做爱的条件反射一旦建立，某种特定的气味就会变成信号，闻到它，身体就自动进入状态。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========== 二、接吻 ========== -->
+<h3 data-cat="kiss">二、接吻：被中国人丢了的手艺</h3>
+<p class="section-intro" data-cat="kiss">吻是最纯洁的性，又是最性感的情。但中国古典文学里，吻空了几千年——《红楼梦》太精神化不会接吻，《金瓶梅》只有赤裸肉欲也没有吻。法国谚云"女要精于烹调和床第工夫"，正与"食色性也"道理相通。</p>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="kiss" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">文化·历史</div>
+    <div class="card-title">中国文化中吻的缺席</div>
+    <div class="card-body">中国古典爱情不会接吻——《红楼梦》的爱情太高尚太精神化，《金瓶梅》只有被压抑太久的淫欲之火，就连《聊斋》里的狐仙也从未有人提及她们的唇舌。吻，这个位于神圣爱与赤裸肉欲之间的位置，空了千年。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>中国古典文学里几乎找不到接吻的描写。你不能想象《红楼梦》里的人物会接吻，那里的爱情太高尚太精神化了，动辄「落花人独立」，最性感的场景不过「微雨双燕飞」。身心健全的人一边为宝黛生死之恋落泪，一边又悄悄纳闷：男女没有刻骨铭心的交合溶化，何以产生这份生死相从的感情？</p>
+        <p>同样不能想象《金瓶梅》里的人物会接吻。那里面绾结纽织着的只是一些男体女体，燃烧着的是被压抑被扭曲得太久的淫欲之火。</p>
+        <p>中国古典爱情不会接吻。要么是超凡脱俗的神圣的爱，要么是赤裸裸的肉欲，中间那个「吻」的位置，空了几千年。就连《聊斋志异》里的狐仙，俏丽迷人，千娇百艳，各色男人纷纷倒在她们裙裾之下醉生梦死。但狐仙的唇舌呢？从来没见《聊斋》里的书生提起过。即使她们有，想必也一定是冰凉的、苍白的、若有似无的吧。</p>
+        <p>吻是艺事。凝神体察你会发现：女人喜爱红玫瑰不是没有道理的，尤其是那待绽的蓓蕾，将启未启，保持着期待的状态。女人与口红形影不离不是没有道理的，每天清晨拧开那一小管精灵，就是一只小妖摇曳着升起，一个喑哑的声音只有女人才能听到：KISS ME。女人嗜食熟透了的草莓不是没有道理的，那肥厚饱满的浆果一经触咬，汁液四溢，一股冷红便幽幽流到了心里。所有的意象都指向那个性与爱的接榫：吻。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="kiss" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">分类·本质</div>
+    <div class="card-title">吻的类型与本质</div>
+    <div class="card-body">性爱之吻是双人舞——有主导方但双方追随共同节奏。母爱之吻是对娇憨柔嫩肉体的狂爱与痴恋。友爱之吻亲昵而轻俏，如坐春风。口唇是刺激性感的副交感神经通道，吻不只用在嘴唇上——喉头、乳头、腹部、大腿内侧、膝盖后方、脚趾，每一处温度与反应都不同。好的吻是一场旅行，不是一张门票。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>有性爱之吻，接吻有如双人舞，也许有主导方，用微妙的暗示带动着、引导着对方，但双方最终都追随一个共同节奏和旋律的导向。有母爱之吻，母亲对婴儿的吻究其实质有着多少对那娇憨柔嫩的肉体的狂爱与痴恋。有友爱之吻，那是亲昵的也是轻俏的吻，却也令人如坐春风。</p>
+        <p>吻在性爱中的作用远不止嘴唇碰嘴唇那么简单。口唇是刺激性感的副交感神经的通道。法国谚语说「女要精于烹调和床第工夫」，他们特别强调烹饪和交合之道，正与「食色性也」的道理相通。</p>
+        <p>吻不只用在嘴唇上。吻她的喉头、颈部、乳头、腹部、大腿内侧、膝盖后方、脚趾，每一个地方的温度、味道、她的反应都不一样。好的吻是一场旅行，不是一张门票。</p>
+        <p>真正沉浸其中的吻，会触发一种奇妙的身体反应。嘴唇相触的那一秒，先是感受到对方的温度，比自己想象的要热。然后触觉接管一切。舌尖的柔软程度、嘴唇的弹性、牙齿偶尔轻轻磕碰的硬质感。等吻到了深处，呼吸混合在一起，鼻腔里全是对方的气味，舌尖尝到的是一种极其个人的、略带甜腥的体味。这个时候，时间感受会变形。可能只过了三十秒，感觉自己已经在里面待了很久很久。眼睛闭着，但脑子里有画面，是一种温暖的、晕开的、没有边界的颜色。这就是好的吻。身体被吻到忘记了时间。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="kiss" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">技巧·实操</div>
+    <div class="card-title">接吻的顺序与技巧</div>
+    <div class="card-body">先吻颈侧再吻嘴唇。由浅入深：嘴唇碰嘴唇，再舌尖探入。同时齿轻咬耳垂、舌尖探入耳廓、热气灌进耳道。舌头不同部位感应不同味道——舌尖甜、舌侧酸、舌根苦。嘴里有异味是所有前戏的终结者，事前刷牙是最小成本最大回报的投资。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>古人说「先吻颈，再吻额」，因为颈部的皮肤敏感度远高于额头。嘴唇贴上去，舌尖轻触颈侧皮肤，温热的呼吸交替刺激，她的身体会不自觉地微微后仰。然后吻嘴唇，由浅入深，先嘴唇碰嘴唇，再舌尖探入。同时用齿轻咬耳垂，舌尖探入耳廓，呼吸的热气灌进耳道。</p>
+        <p>舌头上有大约一万个味蕾，分布在不同区域，舌尖感受甜味，舌侧感受酸味，舌根感受苦味。亲吻时用舌头的不同部位接触对方，传递的感受是不一样的。</p>
+        <p>接吻时嘴里有异味，是所有前戏的终结者。保持口腔清爽是基本功，不是什么高要求。做爱前刷个牙，嚼片薄荷糖——最小成本最大回报的投资。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========== 三、经络爱抚六步 ========== -->
+<h3 data-cat="caress">三、爱抚顺着经络走，比针灸还准</h3>
+<p class="section-intro" data-cat="caress">古人传下来的爱抚方法，按照针灸经络的路线设计，每一步刺激特定穴位和神经末梢。总原则：由上而下，由轻而重，由松而紧，由外而内，由温柔而至狂放。按经络系统专注地爱抚，对方的感应敏锐、快速而自然。</p>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">第一步</div>
+    <div class="card-title">从手指尖到肩膀</div>
+    <div class="card-body">从中指开始一根一根抚摩手指，先磨擦手背再翻到掌心。四指在手臂内侧专心爱抚——手臂内侧皮肤薄、神经末梢密集，从手腕到手肘再到肩膀，一路向上。作用是打开皮肤接触的通道，从最不敏感的部位开始建立信任和期待。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>手，从指尖开始。握住她的手，一根一根手指地抚摩，从中指开始，然后食指与无名指，三指交互摩擦。先磨擦手背，再翻过来由掌心向上游移。指腹在她的指缝间轻轻滑过，手背的皮肤比掌心粗糙，神经末梢分布不同——手背上是轻柔的画圈，掌心是沿掌纹的纵向抚摩。</p>
+        <p>然后是手腕。四指在手臂内侧专心爱抚。手臂内侧的皮肤薄，神经末梢密集，轻轻划过就会引起一阵酥麻。从手腕到手肘，从手肘到肩膀，一路向上。这个动作看起来简单，作用是打开皮肤接触的通道，让她的身体开始习惯被触摸的感觉，从最不敏感的部位开始，建立信任和期待。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">第二步</div>
+    <div class="card-title">从脚趾尖到大腿</div>
+    <div class="card-body">从大拇趾和第二趾之间开始，沿足背经脚踝内侧上行。小腿内侧用手掌从脚踝滑到膝盖下方，膝盖后方腘窝用指腹画圈——皮肤极薄、血管密集，很多人有触电般反应。大腿内侧靠近腹股沟处轻柔划过，热流沿大腿内侧往深处蔓延。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>脚，先从大拇趾和第二趾开始。这两根脚趾之间的缝隙，用手指轻轻分开再合拢，指腹按压趾腹柔软的肉垫。然后沿足背向上，经过脚踝内侧，踝骨下方的凹陷处用拇指轻轻打圈。</p>
+        <p>为什么要从脚开始？因为腿部的神经末梢由上而下分布，脚趾是最末端的敏感点。从最远的地方往核心区域走，才能层层递进地唤醒全身的感知。直接从大腿开始，就像跳过序章直奔高潮——缺了铺垫，味道就差了。</p>
+        <p>从小腿内侧，用手掌从脚踝一直滑到膝盖下方，反复几次。到膝盖后方的腘窝——这是一个被严重低估的敏感区，皮肤极薄，血管密集，用指腹轻轻画圈，很多人会有触电般的反应。</p>
+        <p>从腘窝继续往上，到大腿内侧。先在大腿内侧停留，用手掌从膝盖上方一直滑到大腿根部，反复几次，让期待感慢慢累积。靠近腹股沟的位置，轻柔的指尖划过能带来极强的酥痒感，一股热流沿着大腿内侧往深处蔓延。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">第三步</div>
+    <div class="card-title">颈项与耳朵</div>
+    <div class="card-body">先吻颈部侧面和后颈，再吻嘴唇。吮吻喉头，齿轻咬耳垂，舌尖探入耳廓，热气灌耳道。耳道黏膜对温度变化极其敏感，耳后的迷走神经分支直接连接胸腔和腹腔内脏感觉系统——刺激耳后等于间接按摩了内脏。被亲耳朵时不自觉蜷缩身体是神经反射，不是装的。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>手脚爱抚完毕后，转到上半身。先吻颈部侧面和后颈，再吻额——顺序很重要。颈侧有大量浅表神经末梢，嘴唇贴上去，舌尖轻触皮肤，温热的呼吸交替刺激，她的身体会不自觉地微微后仰。接着吮吻喉头，喉结两侧的凹陷处用嘴唇轻轻吸住再放开，反复几次。</p>
+        <p>然后到耳朵。用齿轻咬耳垂，舌尖探入耳廓，呼吸的热气灌进耳道。耳朵是很多人忽略的敏感带，但被刺激时的反应往往出人意料地强烈。耳道内部的黏膜对温度变化极其敏感，一口温热的呼吸进去，效果远超想象。同时用手指轻轻拉扯耳垂，指腹在耳后那块凹陷处打圈。</p>
+        <p>耳后是另一个容易被忽视的小型敏感区。耳朵被含住的瞬间，一种酸麻感会从耳根往下窜，经过颈部侧面，一路通到锁骨，再顺着脊椎往下走。这不是比喻——耳后的迷走神经分支直接连接到胸腔和腹腔的内脏感觉系统。刺激耳后，等于间接按摩了内脏。很多人被亲耳朵的时候会不自觉地蜷缩身体、抱紧对方，那个动作是神经反射，不是装的。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">第四步</div>
+    <div class="card-title">乳房</div>
+    <div class="card-body">不要一上来就直奔乳头。先用整个手掌覆盖乳房，让掌心温度渗透。然后指腹在乳晕边缘画圈，最后才到乳头——吮吻、轻舔、舌尖绕乳晕打转。乳头受刺激后充血挺立，触感从柔软变得硬实。神经末梢极其丰富，刺激不仅带来局部快感，还会向下腹部和生殖器区域传导。有些女性仅靠乳头刺激就能产生类似高潮的反应。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>经过肩膀、锁骨窝处停留一下，舌尖在锁骨上方的凹陷处轻轻滑过，然后到乳房。</p>
+        <p>不要一上来就直奔乳头。先用整个手掌覆盖乳房，轻轻揉握，让掌心的温度渗透进去。隔着皮肤能感受到乳腺组织柔软而有弹性的质地——跟肌肉的硬不同，跟脂肪的散也不同，是一种独特的、饱满的柔韧。然后逐渐缩小范围，指腹在乳晕边缘画圈——乳晕的皮肤比周围的乳房皮肤更薄、更敏感，指尖滑过能感受到明显的纹理变化。</p>
+        <p>最后才到乳头。吮吻、轻舔、用舌尖绕着乳晕打转。乳头在受到刺激后会充血挺立，触感从柔软变得硬实，像一颗温热的、有生命的小石子。乳头的神经末梢极其丰富，刺激它不仅带来局部快感，还会向下腹部和生殖器区域产生神经传导。有些女性仅靠乳头刺激就能产生类似高潮的反应，身体会不自觉地弓起，把胸部更深地送入对方口中。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">第五步</div>
+    <div class="card-title">背部与腹部</div>
+    <div class="card-body">爱抚乳房的同时另一只手不要闲着——抚摩背部、腰侧、腹部。手掌大面积覆盖皮肤，手指沿脊柱两侧滑下，到尾椎附近轻轻按压。腰臀交界处是很多女性的隐秘敏感区。古法要诀：左手紧抱背梁，右手向重要感带爱抚，同时接吻——三路同时进攻，效果远好于单点。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>在爱抚乳房的同时，另一只手不要闲着。抚摩她的背部、腰侧、腹部。手掌大面积地覆盖皮肤，让体温通过掌心传过去。手指沿着脊柱两侧慢慢滑下，到尾椎附近时轻轻按压。腰臀交界处是很多女性的隐秘敏感区，被忽视得厉害。</p>
+        <p>古人说"男人的左手紧抱女子的背梁，右手再向女子重要的感带爱抚，同时进行接吻"。左手搂腰背，右手向下探索，嘴唇在上半身游走——三路同时进攻。多重刺激同时进行，效果远好于单点进攻。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">第六步</div>
+    <div class="card-title">阴蒂——爱抚的最终落点</div>
+    <div class="card-body">在所有外部敏感带中，阴蒂是女性快感的枢纽。位于外阴前端、两侧小阴唇上端交汇处，大小如豌豆，平时被包皮覆盖，受刺激后充血勃起、包皮后退。素女经称其为"俞鼠"——用"放进舟形祭器作为牺牲的四足兽"来影射，可见古人对这一器官的重视远超今人想象。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>在所有外部敏感带中，阴蒂占据着特殊的位置。它是女性快感的枢纽，也是爱抚的最终落点。</p>
+        <p>阴蒂位于外阴前端，两侧小阴唇的上端交汇处。它的大小因人而异，大致如一粒豌豆。平时，阴蒂的头部被包皮覆盖，只露出很小一部分，不仔细看甚至找不到。当受到刺激后，阴蒂会像阴茎一样充血勃起，体积增大，包皮随之向后卷缩，暴露出最敏感的头部。这个过程需要时间，所以不能急。</p>
+        <p>素女经里把阴蒂叫"俞鼠"。"俞"是空的小船，"鼠"是四足兽，用"放进舟形祭器作为牺牲的四足兽"来影射阴蒂。古人给它取这么文雅的名字，说明他们对这个器官的认识和重视程度，远超今天很多男人。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========== 四、阴蒂刺激 ========== -->
+<h3 data-cat="clit">四、阴蒂刺激的细节</h3>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="clit" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">手法</div>
+    <div class="card-title">位置、手法与力度</div>
+    <div class="card-body">指腹优于指尖——指尖太尖锐，力度不好控制。用食指或中指指腹，贴住阴蒂头部，做小幅度环形抚摩或上下轻柔揉动。力度要轻，比你想象的更轻，一开始几乎只是在皮肤表面滑过，随她的反应逐渐加重。没有标准答案——有些人偏好直接刺激头部，有些人喜欢隔包皮间接刺激，有些更喜欢在小阴唇上来回抚摩。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>用手刺激阴蒂时，指腹比指尖好。指尖太尖锐，力度不好控制，容易产生不适感甚至疼痛。用食指或中指的指腹，贴住阴蒂头部，做小幅度的环形抚摩，或者做上下轻柔的揉动。力度要轻，比你想象的轻。刚开始时几乎只是在皮肤表面滑过，随着她的反应逐渐加重。</p>
+        <p>有些女性偏好直接刺激阴蒂头部，有些则喜欢隔一层包皮的间接刺激，还有些更喜欢在阴蒂两侧的小阴唇上来回抚摩，通过牵拉小阴唇间接带动阴蒂包皮的运动。没有标准答案，每个人的偏好不同。丈夫在日积月累中会逐渐掌握妻子阴蒂的位置、敏感的角度和偏好的力度——这需要实地研究，书本只能指个方向，手感要靠自己练。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="clit" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">反应·配合</div>
+    <div class="card-title">反应信号与夫妻配合</div>
+    <div class="card-body">正确信号：呼吸加快、身体微弓、骨盆下意识前送。快感层叠累积——起初像石子投水的小涟漪，随刺激持续变大变密，从阴蒂传到小腹、蔓延整个骨盆，最后连大腿内侧和脚趾缝都能感受到脉冲式电流。妻子应主动引导丈夫的手到正确位置，用身体语言暗示。阴蒂刺激不应孤立——同时接吻、抚摩腰腹大腿。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>如果她的呼吸加快、身体微微弓起、下意识地把骨盆向前送，说明方向和力度都对了。</p>
+        <p>当阴蒂被精准而轻柔地持续刺激时，快感不会突然爆炸。它层叠累积而来。起初像一颗小石子投进水面，只有一圈很小的涟漪。随着刺激持续，涟漪变大、变密，层层叠叠地往外扩散，从阴蒂传到小腹，从小腹蔓延到整个骨盆，最后连大腿内侧和脚趾缝里都能感受到那种脉冲式的电流。这时她的身体会变得滚烫，皮肤上可能泛起一层细密的鸡皮疙瘩，乳头胀得更硬，阴蒂在指腹下明显变大——充血到了极限，包皮完全后退，最敏感的头部完全暴露。到这个阶段，她已经不太在乎手指动得快还是慢了。她整个下体都变成了一个巨大的、极度渴望被填满的感知器官。</p>
+        <p>经验不足的丈夫常常找不到正确位置，或者摸偏了、力度过大。妻子应该主动引导——把他的手拉到你感觉最满意的地方，用手指带着他调整位置和方向。不需要开口说话，一个轻轻的牵引动作就够了。或者用身体语言暗示：他摸对了地方，你的身体会有反应，呼吸会变，腰会微微拱起。聪明的丈夫会读懂这些信号。</p>
+        <p>阴蒂的刺激不应该是孤立的。用手抚弄阴蒂的同时，嘴唇应该吻着她的嘴唇或乳房，另一只手可以抚摩腰腹或大腿。她身体的任何回应——抓你的手臂、收紧双腿、发出声音——都值得嘉许，说明方向对了。</p>
+        <p>当女性被充分唤起之后，往往会本能地伸手去抓握丈夫的阴茎。有些热情的妻子会用嘴含住丈夫的阴茎，或用丈夫的龟头摩擦自己的阴蒂来获得快感。这些动作对丈夫的刺激极强，但容易让他过早到达高潮。妻子可用手掌或手指围绕阴茎根部轻揉，保持充血勃起状态，但不要做过火的动作——否则丈夫提前泄精，后面的事就无从谈起了。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========== 五、三个常见错误 ========== -->
+<h3 data-cat="caress">五、三个坑，踩一个就前功尽弃</h3>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">错误一</div>
+    <div class="card-title">不要一上来就摸性器</div>
+    <div class="card-body">女性对爱抚有心理接受步骤：从手到颈、从脚到腿、从远到近，层层递进。第一步就把手伸向下体，绝大多数女性会本能反感和抗拒，哪怕嘴上不说，身体也会僵硬。这不是矜持——是大脑对粗暴入侵的本能排斥。耐心走完前面的流程再进入关键区域。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>女性对爱抚有心理上的接受步骤，从手到颈，从脚到腿，从远到近，层层递进。如果第一步就把手伸向她的下体，绝大多数女性会本能地反感和抗拒。哪怕她嘴上不说，身体也会僵硬。这跟矜持没关系——是大脑对粗暴入侵的本能排斥。耐心走完前面的流程，等她的身体真正准备好之后，再进入关键区域。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">错误二</div>
+    <div class="card-title">手指深入阴道要谨慎</div>
+    <div class="card-body">手指可以弯曲、探索到阴茎触及不到的位置，对阴道内壁的刺激比阴茎更大更强。偶尔使用无问题，但如果养成习惯，妻子的敏感阈值会被抬高，日后正常交合反而觉得不够刺激。且手指可能带入细菌，操作前务必清洁。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>手指和阴茎不同，手指可以弯曲，可以探索到阴茎触及不到的位置，对阴道内壁的刺激比阴茎更大更强。偶尔使用没有问题，但如果养成习惯，妻子的敏感阈值会被抬高，日后正常交合时反而觉得不够刺激，那就适得其反了。而且手指可能带入细菌，操作前务必清洁。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-free">错误三</div>
+    <div class="card-title">爱抚时间不宜过长</div>
+    <div class="card-body">润滑液分泌过多，超过了交合所需的量，反而会降低摩擦时的刺激感。润滑过度意味着摩擦力下降，快感也就打了折扣。爱抚的目的是"把她点燃"——火着了就该添柴，进入交合，不必在门口徘徊太久。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>爱抚时间不宜过长。润滑液分泌过多，超过了交合所需的量，反而会降低摩擦时的刺激感。润滑过度意味着摩擦力下降，快感也就打了折扣。爱抚的目的是"把她点燃"。火着了就该添柴，进入交合。不必在门口徘徊太久。</p>
+        <p>还有一个隐性问题：爱抚时妻子的心中，除性高潮的刹那间希望男性的粗野以外，任何时候她都渴望温柔体贴。她希望被爱，并非只是能供给丈夫泄欲而已——她要求他爱她的肉体，更渴念他爱她的灵魂。所以爱抚能触及全身，也可满足她这种心理。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========== 六、初夜 ========== -->
+<h3 data-cat="caress">六、初夜：不必完美</h3>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">数据</div>
+    <div class="card-title">失败率与失败原因</div>
+    <div class="card-body">日本大规模调查：73.4%完全没有失败经验，也就是说约四分之一的人第一次并不顺利。失败原因分布——交合疼痛37.1%（最大一类，多半男方太急、前戏不够、润滑不足）、找不到阴户17.7%、交合前射精11.3%、交合前阳具萎缩4.8%，四项合计70.9%，多数与男方经验不足或准备不当有关。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>日本石洪淳美博士的大规模调查显示：初次交合完全没有失败经验的人占73.4%，约四分之一的人第一次并不顺利。</p>
+        <p>失败原因分布：交合疼痛导致失败占37.1%，是最大的一类——原因多半是男方太急、前戏不够、润滑不足、硬要插入、女方疼痛难忍。找不到阴户占17.7%，将近五分之一。交合前就射精占11.3%，每十个人里就有一个多还没插入就已经泄了。交合前阳具萎缩占4.8%，太紧张或者太兴奋到反而失控。</p>
+        <p>以上四项合计占70.9%，多数与男方经验不足或准备不当有关。素女经反复告诫男人要"定气、安心、和志"，要"浅内徐动"——句句落在地上。初夜失败，十之七八是男人的功课没做好。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-alert">底线</div>
+    <div class="card-title">失败后怎么办</div>
+    <div class="card-body">第二次尝试就成功的占30.1%，第三到第五次成功的占43.8%——超七成在前五次内成功。但有一条铁律底线：女方绝不能说"你出来了？差劲"或"你是不是阳痿"之类的话。这种话会瞬间摧毁男人自信心，把偶发的紧张变成持久的心理障碍。温柔劝丈夫早点休息，或过一会儿再试——温柔是最好的药。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>失败之后怎么办？数据显示：第二次尝试就成功的占30.1%；第三到第五次成功的占43.8%。超过七成的人在前五次以内就能成功。</p>
+        <p>但有一条底线：如果男方早泄或者勃起不全，女方千万不要说出"你出来了？差劲"或者"你是不是阳痿"之类的话。这种话会瞬间摧毁男人的自信心，把一次偶发的紧张反应变成持久的心理障碍。遇到这种情况，妻子应该若无其事地劝丈夫早点休息，或者过一会儿再试。温柔是最好的药。</p>
+        <p>初夜不需要完美。它甚至不需要成功。它需要的是耐心、温柔，和不要把一次失败当成世界末日的心态。为求顺利，双方都应该事先了解彼此性器官的构造和基本性知识，心中有数，临场不慌。回到素女经的六个字：定气、安心、和志。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ========== 七、把爱抚当成手艺 ========== -->
+<h3 data-cat="caress">七、把爱抚当成一门手艺来练</h3>
+
+<div class="card-grid cols2">
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-attr">日常练习</div>
+    <div class="card-title">日常触碰与手掌代指尖</div>
+    <div class="card-body">平时就养成触碰习惯——看电视时把手放她腿上，走路时牵手，刷手机时手指划过她小臂。日常肢体接触是做爱前戏的延伸，让皮肤始终记得你的触感。"别扭"就是因为太久没碰了，解决方法只有一个：频率。爱抚初期用手掌覆盖而非指尖戳刺——手掌温度传导、接触面积、按压均匀度都优于手指，等她身体完全打开再换指尖精雕细琢。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>平时就养成触碰她的习惯。看电视时把手放在她腿上，走路时牵她的手，坐在沙发上看手机时用手指轻轻划过她的小臂。日常的肢体接触是做爱前戏的延伸，它让皮肤始终记得你的触感。很多老夫老妻说"不好意思"或者"觉得别扭"——这种别扭是怎么来的？就是因为太久没碰了。解决方法只有一个：频率。每天碰，天天碰，碰成习惯，不碰才奇怪。</p>
+        <p>学会用手掌替代指尖。在爱抚的初期阶段，大面积的手掌覆盖比精细的指尖戳刺更有效。手掌的温度传导、皮肤接触面积、按压的均匀度，都比手指好。等她身体完全打开了，指尖的精细操作才登场。先用手掌铺底，再用指尖雕琢——这个顺序反不得。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="caress" onclick="openCardModal(this)">
+    <div class="card-tag tag-attr">心法</div>
+    <div class="card-title">学会闭嘴与学会等</div>
+    <div class="card-body">不要每隔三十秒问"这样舒服吗"——用眼睛和手指读反应，别用嘴审。她的呼吸、身体动作、不自觉发出的声音，都是回答。问得越多，她越紧张。好的爱抚是耐心的等待：等皮肤适应体温，等呼吸从浅变深，等身体从僵硬变柔软。急了，她的身体就关上了。素女经五个"徐徐"——徐徐合之、徐徐内之、徐徐摇之、徐徐深之、徐徐引之——每一个字都在说同一句话：别急。</div>
+    <div class="expand-panel">
+      <div class="prose">
+        <p>学会闭嘴。很多男人在爱抚过程中忍不住要问"这样舒服吗""要不要换个方式"，每隔三十秒来一句。持续提问会打断她的感受。用眼睛和手指去读她的反应，别用嘴去审。她的呼吸、她的身体动作、她不自觉发出的声音，都是回答。问得越多，她越紧张，越出不了状态。</p>
+        <p>学会等。好的爱抚是一场耐心的等待。等她的皮肤适应体温，等她的呼吸从浅变深，等她的身体从僵硬变柔软，等她的手开始主动回应。每一层"等"都是在给她的身体时间去准备，去打开。急不得。急了，她的身体就关上了。</p>
+        <p>爱抚是一门手艺，跟做饭、弹琴、写字一样，靠练手感，不靠背步骤。第一次做笨手笨脚，正常。第十次做手指开始自己长记性。第一百次做手比脑子更清楚她需要什么。手上功夫再好，她呼吸还没变就急着往下走，白搭。反过来，技巧再糙，只要在认真感受她的反应，在她手下有了变化就调整，在她眼里就是最好的爱人。</p>
+        <p>有些女人在一生中从未被好好抚摸过。她们的前戏被简化成了三分钟的敷衍。她们可能结了婚、生了孩子、过了十几二十年的性生活，但从来没有体验过一次完整的、从指尖到脚趾的、不赶时间的爱抚。她们需要。只是没有人给过。</p>
+        <p>素女经说的"徐徐合之、徐徐内之、徐徐摇之、徐徐深之、徐徐引之"，五个"徐徐"，每一个字都在说同一句话：别急。</p>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- TAB 2: 信号与心理 -->
+<div id="readher-signals" class="health-section">
+<p class="section-desc">古人把性爱中的身体信号整理成了一套完整的观察体系。从男方的准备信号，到女方的九种兴奋层次，到交合中的五徵反馈，到高潮的十种身体语言——层层递进。加上男女沟通的心理密码，理解比技巧更重要。</p>
+
+<h3>信号体系</h3>
+<div class="card-grid cols3" id="readher-grid" data-cat="signals" role="region" aria-label="信号体系">
+</div>
+
+<!-- 沟通心理 -->
+<h3>沟通与心理</h3>
+<div class="card-grid cols2">
+  <div class="card" data-cat="psych" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">男人</div><div class="card-title">男人的五个性秘密</div><div class="card-body">被拒绝的挫败感不亚于当众挨耳光。轮流主动才是大多数男人的期待。硬了不等于想要。</div>
+    <div class="expand-panel"><div class="prose">
+      <p><strong>秘密一：被拒绝的挫败感，不亚于当众挨一耳光。</strong>男人发出性信号的时候，表面上是在说「我想做爱」，潜台词其实是「请接纳我」。男性睾酮水平与被接纳感直接挂钩。一句「不行！」「太累了」甩过去，他感受到的不是拒绝做爱，是拒绝他这个人。经常被拒绝，他可能停止求爱，双方感情出现裂痕。更糟的是，他或许会去别处寻求性生活，要的不过是一种「被接纳」的确认。不必每次都有求必应。回绝的关键是让他知道：我拒绝的是这件事，不是你这个人。「我很爱你，但今天工作太累了，明天早上行吗？」拒绝的方式比拒绝本身重要得多。前者是解释，后者是攻击。男人要的，是被看见。</p>
+      <p><strong>秘密二：轮流主动，才是大多数男人的期待。</strong>妻子要偶尔地充当「性进攻者」，男子很喜欢女性展示她对性的爱好。由女方来调动男方的性意识，常会收到意想不到的效果。如果男子总是充当主动角色，他可能觉得千篇一律，还总要冒被拒绝的风险。一项研究让138位男性选择性生活中谁更主动的模式，传统的「男方主动」并不受欢迎，「轮流主动」才是大多数男人的期待。被渴望的感觉，男人也需要。</p>
+      <p><strong>秘密三：大脑关了说话那盏灯，不是不想理你。</strong>做爱时男子一般不喜欢多与妻子交谈。他是太投入于大脑右半球的行为中枢而语言功能无法起作用了。性兴奋时理性思维被抑制，感性思维被激活。可以说话——呻吟、呢喃、简短的鼓励，这些是催情。长篇大论的对话、生活琐事的讨论，会让男人瞬间出戏。语言中枢被激活的瞬间，性兴奋就会中断。</p>
+      <p><strong>秘密四：眼睛吃到的甜头，比手上多得多。</strong>男子易受视觉刺激而女子易受听觉刺激。男性的性冲动有超过七成来自视觉信号。性感内衣、柔和灯光、几支蜡烛，这些比费尽心机学什么新技巧都管用。偶尔穿件性感内衣、换个柔和灯光、点几支蜡烛，这些细节带来的效果远比费心学新技巧来得实在。对男人来说，眼睛吃到的甜头比手上多得多。</p>
+      <p><strong>秘密五：硬了不等于想要，不确定就问。</strong>勃起并不总是要性交。可能是憋尿、内裤过于紧小、清晨膀胱充盈造成的生理反应。如果认为丈夫勃起就意味着他进入了「性状态」，只会给两人的关系带来问题。最简单的办法：不确定就问。「你想要，还是就抱抱？」这句话不会扫兴，反而让男人觉得被理解。</p>
+    </div></div>
+  </div>
+  <div class="card" data-cat="psych" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">女人</div><div class="card-title">女人最需要的事</div><div class="card-body">做完别翻身就睡，抱一下再放手。高潮是忘我状态不是回答问卷。小电影的花活床上大多用不上。</div>
+    <div class="expand-panel"><div class="prose">
+      <p><strong>做完别翻身就睡，抱一下再放手。</strong>男人高潮后有一种生理性倦怠，催乳素分泌导致困意袭来，这是生理事实，不是他不爱你。但女人在消退期更长、余韵期更久，这时候她们需要的是拥抱、亲吻、温柔的触碰。在消退期继续爱抚对女性来说必不可少，否则她会认为男性只图自己的快活。哪怕困得睁不开眼，搂她三十秒。把她拉进怀里，胸口贴着后背，手掌轻轻搭在她腰侧。亲她后颈一下，说句「真好」，再睡。这三十秒的温存，能抵消闭眼后她心里升起的全部委屈。有经验的男人知道，善后比前戏更影响下一次的性欲。这次让她带着温暖入睡，下次她主动找来的概率会大得多。</p>
+      <p><strong>高潮是忘我状态，不是回答问卷。</strong>最令女人烦扰的，就是男性在性事进行期间经常提问：「舒不舒服？」「兴不兴奋？」「到高潮没？」在男方而言这些发问可能只是出于关心，但女方在回答的同时，已令她们分心了。高潮需要大脑放空。持续提问等于在提醒她「你得对这件事有所交代」，反而制造焦虑。想知道她舒不舒服，看她的反应：呼吸急不急、身体弓不弓、手抓不抓、有没有发出不自觉的声音。用眼睛和手去读，别用嘴去审。</p>
+      <p><strong>小电影里的花活，床上大多用不上。</strong>有些男人会误以为，像小电影的男主角般花巧招式尽出，便能令女方高潮迭起。这想法大错特错。太多花巧不但会令女方感到烦厌，而且有些小电影中的动作难度甚高，根本就不能实际地运用于性爱上。那些小电影只不过在演戏，不要信以为真。</p>
+    </div></div>
+  </div>
+  <div class="card" data-cat="psych" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">沟通</div><div class="card-title">经常指导动作的妻子，67%达到高潮</div><div class="card-body">不常表达性感受的妻子只有20%能获得高潮。经常向丈夫谈出性感受的超过50%。经常指导具体动作的达到67%。差距是三倍以上。</div>
+    <div class="expand-panel"><div class="prose">
+      <p><strong>数据说话：</strong>不常表达性感受的妻子只有20%能获得性高潮；经常向丈夫谈出性感受的女性，这个比例超过50%；而经常指导丈夫具体动作的妻子，67%的机会能达到高潮。差距不是一星半点，是三倍以上。</p>
+      <p><strong>怎么开口：</strong>先从小事开始。一上来就说「我希望你改变全部方式」，听上去跟批评没区别。先说一件喜欢的事：「上次那样做的时候，我特别舒服。」这句话没有任何攻击性，对方听了只会高兴，沟通的通道也就打开了。措辞很重要。试着说「我更喜欢另一种方式」，不要说「你那样不行」。主语从「我」变成「你」，一字之差，效果天壤。有个特别有效的办法：写下来。如果面对面说不出口，把你的需求写在纸上或者发条消息。很多人在涉及最私密的需要时，嘴上说不出来，但写的时候反而能准确表达。关键是写清楚「何时」「哪个部位」「用什么方式」。还有一件事容易被忽略：告诉他在什么情况下不想做。孩子在旁边、工作太累、身体不舒服，这些都需要直说。含糊其辞只会让他误读信号。</p>
+      <p><strong>三种沟通类型：</strong>赞美型——简单直接地告诉对方身上哪些地方让人着迷。「嘴唇好软」「锁骨这里真好看」「摸我的时候骨头都酥了」。赞美要具体，「好棒」三个字不如「刚才那样吻我的时候整个人都软了」十五个字。具体的赞美让人相信，笼统的赞美让人怀疑是敷衍。呢喃型——不需要有实际内容，就是气息和声音的组合。轻轻的呻吟、含混的低语、呼吸加重后的呢喃，这些声音本身就是信号。引导型——用温柔的方式告诉对方你想要什么。「我想你吻我这里」「再慢一点」「就这样，别停」。引导的关键是语气，是撒娇式的请求，不是指挥官式的命令。有男人说，他最喜欢听到的是「别停」这两个字，因为在那一刻他知道自己做对了，而且对方的急迫让他觉得自己是被需要的、被渴望的。</p>
+    </div></div>
+  </div>
+  <div class="card" onclick="openCardModal(this)">
+    <div class="card-tag tag-type">心理</div><div class="card-title">心理暗礁与性幻想</div><div class="card-body">沮丧焦虑、自私、错误性观念——性生活的崩塌往往不是从床上开始的。伪装高潮是善意谎言但制造恶性循环。</div>
+    <div class="expand-panel"><div class="prose">
+      <p><strong>心理的暗礁。</strong>性生活的崩塌不一定是从床上开始的，很多时候是被心理因素悄悄侵蚀的。沮丧和焦虑——生活中的重大变故，亲人离世、工作受挫、经济压力，都会让一个人对性失去兴趣。这不是「不爱了」，是情绪的物理性抑制。自私——两个人都不说好话，都觉得自己付出更多，性生活就变成了义务而不是享受。错误的性观念——把性当成「竞技」，觉得必须时间长、花样多、技巧高才叫「好」。这种观念的来源往往是色情影片里的夸张表演。现实中的性生活不需要那样，两个人都舒服、都满足，就是好的。不要用「正常」来绑架自己——一对夫妻如果一周一次都满意，那他们就是正常的。性生活的频率、方式、偏好，全由两个人的满意度决定，不由任何外部标准决定。</p>
+      <p><strong>伪装高潮是善意谎言，但会制造恶性循环。</strong>相当多的女人有过伪装高潮的经历。她们怕丈夫觉得自己「不行」，怕伤他的自尊。在她们看来假装高潮是一种「体贴」。但长期伪装会制造恶性循环：你装了，他以为自己做得很好，继续保持同样的方式，你继续达不到，继续装。最后两个人都在演戏，真正的快感反而越来越远。打破循环的办法只有一个：坦诚。但别在做的时候突然甩一句——找个双方都放松、气氛好的时候，从正面讲起：「上次那样做的时候，我觉得特别好，下次能不能再多那样一会儿？」先建立信任，再逐步引导。指出不足之前，先肯定出色之处。</p>
+      <p><strong>性幻想：说出来，别憋着。</strong>几乎每个人都有性幻想——我说的是「几乎每个人」，不是「很多人」。有性幻想不是精神出轨，不是心理有问题。性幻想是大脑对性的自然延伸。幻想之所以是幻想，就是因为它和现实之间有一道安全的屏障。压抑性幻想不会让它消失，只会让人对自己的欲望更加困惑和自责。分享性幻想是一件冒险但值得做的事。如果双方有足够的信任基础，分享幻想可以极大地提升亲密感和性兴奋度。前提是安全——得确保对方不会因为听到的幻想内容而评判、嘲笑。如果不确定，先用试探的方式：「我在网上看到有人说……你觉得呢？」用第三人称开路，看对方的反应再决定要不要继续。</p>
+    </div></div>
+  </div></div>
+
+</div><!-- /readher-signals -->
+</div><!-- /page-readher -->
+
+<!-- ====== PAGE 4: 养生处方 ====== -->
+<div id="page-health" class="page">
+<h2>养生处方</h2>
+<p class="section-desc">泄精频率、八益处方、呼吸修炼、进阶功法、身体自检——古人把养生做成了可执行的系统。</p>
+
+<div class="health-tabs" role="tablist">
+  <button role="tab" aria-selected="true" class="health-tab active" onclick="switchHealthTab('practice',this)" aria-current="page">日常练习</button>
+  <button role="tab" aria-selected="false" class="health-tab" onclick="switchHealthTab('knowledge',this)">知识自检</button>
+  <button role="tab" aria-selected="false" class="health-tab" onclick="switchHealthTab('sexhealth',this)">常见问题</button>
+</div>
+
+<!-- TAB 1: 日常练习 -->
+<div id="health-practice" class="health-section active">
+
+<!-- 精力五衰 -->
+<h3>精力五衰</h3>
+<div class="card-grid grid-five">
+  <div class="card" onclick="openCardModal(this)"><div class="card-tag tag-free">第一衰</div><div class="card-title">精泄而出</div><div class="card-subtitle">精液不受控制流出</div><div class="card-body">肾气不固，封藏失职。精关松弛，稍有刺激就泄。病机在气伤。</div><div class="expand-panel"><div class="prose"><p>精液不由自主流出，控制不住。平时走路、上厕所、稍微一用力，精液就会自动溢出。这不是精满自溢，是气不够了，管不住精了。五衰是一根链条上逐渐滑落的五个节点。前三种是早期信号，出现任何一种就该认真对待，减少泄精频率，调整作息，必要时就医。</p><p>彭祖给出了统一治疗方案：「御而不施，不过百日，气力必致百倍。」继续交合但控制住不泄精，坚持不到一百天，精力就能恢复翻倍。</p></div></div></div>
+  <div class="card" onclick="openCardModal(this)"><div class="card-tag tag-free">第二衰</div><div class="card-title">精清而少</div><div class="card-subtitle">精液稀薄如水</div><div class="card-body">脾虚则精微物质生成匮乏。输出量变少，浓度变稀，质量全面滑坡。病机在肉伤。</div><div class="expand-panel"><div class="prose"><p>正常的精液应该是灰白色、半透明、有一定黏稠度的。变得清稀如淘米水，说明底气亏损波及到了物质底子——精囊腺和前列腺的分泌功能下降，造精的速度跟不上。从第一衰的「管不住」恶化到「造不出」。</p><p>五衰链条：气伤（精泄而出）→ 肉伤（精清而少）→ 筋伤（精变而臭）→ 骨伤（精出不射）→ 体伤（阴衰不起）。每亮一盏灯说明离红线更近一步。前三种出现就该减频调作息。</p></div></div></div>
+  <div class="card" onclick="openCardModal(this)"><div class="card-tag tag-free">第三衰</div><div class="card-title">精变而臭</div><div class="card-subtitle">颜色发黄发绿，气味腥臭</div><div class="card-body">下焦湿热，慢性前列腺炎已形成。精液淤积过久，成分变质。病机在筋伤。</div><div class="expand-panel"><div class="prose"><p>正常精液有淡淡的腥味，但如果臭不可闻，说明肝系统出了问题。肝主筋，精液品质反映肝的疏泄和解毒功能。肝气郁结或肝经湿热下注，精液就会变色变味。现代医学多提示生殖道感染，如精囊炎、前列腺炎，精液中白细胞超标。</p><p>从气伤→肉伤→筋伤，已经滑到了链条的第三级。颜色和气味的改变是感染和炎症的明确信号，该就医了。</p></div></div></div>
+  <div class="card" onclick="openCardModal(this)"><div class="card-tag tag-free">第四衰</div><div class="card-title">精出不射</div><div class="card-subtitle">有射精感但出不来</div><div class="card-body">射精管和尿道括约肌协调崩溃。精液逆流进膀胱。肾精亏到骨子里。病机在骨伤。</div><div class="expand-panel"><div class="prose"><p>有精液流出但没有射精的快感和力度。感觉像「漏」出来的，不是「射」出来的。肾主骨，肾精亏虚到一定程度，连推动精液射出的那股力量都没有了。这类人往往同时伴有腰膝酸软、骨质疏松的前期征兆。</p><p>到了第四衰，恢复难度比前三级大得多。正常人不等到灯亮才踩刹车。等到了骨伤才重视，损耗已经实实在在发生了。</p></div></div></div>
+  <div class="card" onclick="openCardModal(this)"><div class="card-tag tag-free">第五衰</div><div class="card-title">阴衰不起</div><div class="card-subtitle">阴茎无法勃起</div><div class="card-body">全身机能崩塌。睾酮断崖下跌，海绵体纤维化。气肉筋骨一层层垮到底。病机在体伤。</div><div class="expand-panel"><div class="prose"><p>阴茎无法勃起，或者勃起极不坚挺。气、肉、筋、骨一层一层垮下去，到最后整体机能崩塌。睾酮水平断崖式下跌，海绵体纤维化，血管内皮功能丧失。已经不是精的问题了，是整个身体都撑不住了。</p><p>五衰终极警报。前四级全部走完才到这一步。彭祖的对策：「御而不施，不过百日，气力必致百倍。」——但到了第五衰，百日未必够，需要系统性的身体调理。</p></div></div></div>
+</div>
+
+<!-- 十动不泄 -->
+<h3>十动不泄：忍一次蓄一次</h3>
+<div class="signal-card" onclick="this.classList.toggle('open')">
+  <div class="signal-header">
+    <span class="signal-num signal-num-accent3">动</span>
+    <div class="signal-info">
+      <div class="s-title">十动阶梯表</div>
+      <div class="s-hint">黄帝问素女：想射精但忍住不射，有什么好处？点击展开完整阶梯。</div>
+    </div>
+  </div>
+  <div class="signal-table-wrap">
+    <div class="signal-table-inner">
+      <table class="signal-table">
+        <thead><tr><th>动</th><th>名称</th><th>身体变化</th><th>核心逻辑</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sig-icon">1</span>一动</td><td>耳目聪明</td><td>会阴肌不自主收缩，NK 细胞活性升高，感官敏锐</td><td>免疫激活</td></tr>
+          <tr><td><span class="sig-icon">2</span>二动</td><td>音声高</td><td>呼吸肌和声带肌群张力增加，发声有力</td><td>交感兴奋</td></tr>
+          <tr><td><span class="sig-icon">3</span>三动</td><td>五脏安宁</td><td>自主神经从高度兴奋回落到平衡态，内脏节律同步</td><td>神经回落</td></tr>
+          <tr><td><span class="sig-icon">4</span>四动</td><td>血脉充盈</td><td>阴茎充血最大值，血液继续全身循环，四肢温热</td><td>循环强化</td></tr>
+          <tr><td><span class="sig-icon">5</span>五动</td><td>腰背强健</td><td>盆底肌、腰大肌、竖脊肌高强度等长收缩训练</td><td>核心分水岭</td></tr>
+          <tr><td><span class="sig-icon">6</span>六动</td><td>尻股益力</td><td>臀部肌群和会阴深横肌练得紧实</td><td>盆底强化</td></tr>
+          <tr><td><span class="sig-icon">7</span>七动</td><td>身体生光</td><td>毛孔打开，微循环加速，气色红润有光泽</td><td>代谢加速</td></tr>
+          <tr><td><span class="sig-icon">8</span>八动</td><td>寿命延长</td><td>激活 SIRT1 长寿基因通路，适度急性应激延缓衰老</td><td>基因激活</td></tr>
+          <tr><td><span class="sig-icon">9</span>九动</td><td>通于神明</td><td>神经系统完整循环，脑内啡大量分泌，意识进入深度冥想</td><td>神经重塑</td></tr>
+        </tbody>
+      </table>
+      <div class="signal-note"><div class="signal-note-label">核心逻辑</div><div class="signal-note-text">每次忍住不射就是一次精力蓄积，蓄积越多身体越好。每次射精都是一次耗散，耗散越频繁衰退越快。十动的描述有夸张成分，但核心逻辑扎实——适度的应激训练确实有益。神经系统学会从亢奋中自主回落，循环系统学会在高压下保持稳定。表中"身体变化"一列的现代机制（NK 细胞、SIRT1 等）多为动物实验或推测，证据等级低于「药石辅义」页的分级标注。</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 腹式呼吸 -->
+<h3>腹式呼吸五步法</h3>
+<div class="signal-card" onclick="this.classList.toggle('open')">
+  <div class="signal-header">
+    <span class="signal-num signal-num-accent4">息</span>
+    <div class="signal-info">
+      <div class="s-title">腹式呼吸操作表</div>
+      <div class="s-hint">仰卧或盘坐，鼻吸气沉入丹田，吐少纳多。每天 20-30 分钟，坚持两三周见效。点击展开五步详解。</div>
+    </div>
+  </div>
+  <div class="signal-table-wrap">
+    <div class="signal-table-inner">
+      <table class="signal-table">
+        <thead><tr><th>步骤</th><th>名称</th><th>操作要领</th><th>关键细节</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sig-icon">1</span>第一步</td><td>姿势</td><td>仰卧双腿微曲脚掌平放，或盘坐脊背挺直不僵硬</td><td>双手叠放小腹，掌心贴肚脐下方</td></tr>
+          <tr><td><span class="sig-icon">2</span>第二步</td><td>吸气</td><td>鼻缓缓吸气，意念引导气流向下沉入丹田</td><td>小腹向外膨胀，胸部不耸起；靠气「撑」起来，不是蛮力鼓肚子</td></tr>
+          <tr><td><span class="sig-icon">3</span>第三步</td><td>停顿</td><td>吸满后稍停一到两秒</td><td>这个停顿是把气稳在丹田的关键</td></tr>
+          <tr><td><span class="sig-icon">4</span>第四步</td><td>吐气</td><td>嘴或鼻缓缓呼出，吐气量少于吸气量</td><td>「吐少纳多」；小腹自然回收，不刻意挤压</td></tr>
+          <tr><td><span class="sig-icon">5</span>第五步</td><td>循环</td><td>每天 20-30 分钟，持续练习</td><td>初期每分钟 6-8 次，熟练后拉长到 3-4 次；坚持两三周见效</td></tr>
+        </tbody>
+      </table>
+      <div class="signal-note"><div class="signal-note-label">作用原理</div><div class="signal-note-text">腹式呼吸直接按摩腹腔脏器，促进胃肠蠕动和盆腔血液循环。深长呼吸激活副交感神经，降低皮质醇水平，让身体从应激状态切换到修复模式。对性功能的意义在于：盆底肌群随呼吸节律反复收缩放松，等同于凯格尔运动的自动版本，坚持练习能显著增强勃起硬度和射精控制力。吐少纳多的要诀让肺泡充分扩张，血氧饱和度提升，全身细胞代谢效率提高。</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 八益摘要 -->
+<h3>八益处方速览</h3>
+<div class="card-grid" id="bayi-grid"></div>
+
+<!-- ==================== 进阶功法（第十二章） ==================== -->
+<h3>进阶功法</h3>
+<p class="section-desc">导引、胎息、脚趾运动、采阴补阳——从呼吸到肢体到交合，层层递进的功法体系。</p>
+
+<!-- ==================== Ch12-1: 导引法 ==================== -->
+<section class="section" id="sec-daoyin">
+  <h3>导引法（华佗五禽）<span class="chapter-badge">第十二章</span></h3>
+  <p class="section-desc">房中术的肢体功法源头——从庄子到华佗的柔软体操传统</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 导引法总论 -->
+    <div class="card" >
+      <div class="card-tag tag-source">功法渊源</div>
+      <div class="card-title">导引法：让精气通体流畅的柔软体操</div>
+      <div class="card-body">素女说「玉茎不动则辟死其合，所以常行以当导引」。导引法利用屈伸、俯仰、行卧、蹲躅、吟唱和呼吸动作锻炼全身，与练气法从来不分家。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>庄子的记述：</strong>《庄子》中已有导引法记载，说「真人之息以踵，众人之息以喉」，呼吸深到脚底虽为夸张，但深到丹田是真实可行的。导引法就是利用屈伸、俯仰、行卧、侍立、蹲躅、徐步、吟唱和呼吸动作的一种健康体操。</p>
+        <p><strong>素女的核心论述：</strong>「玉茎不动则辟死其合，所以常行以当导引。」阳具不动就会像僵蛇一样死在巢穴里，所以要练导引法，让精气通体流畅。</p>
+        <p><strong>倒立动作的医学价值：</strong>先停立一段时间，再头向下作倒立。人体血液在倒立时向头部回流，使上半身得到充分的血液供应，能防止脱发、慢性头痛症，并能刺激脑下垂体，促使性欲旺盛。这非常符合现代医学理念。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 华佗五禽 -->
+    <div class="card" >
+      <div class="card-tag tag-type">历史人物</div>
+      <div class="card-title">华佗：五禽术的创立者</div>
+      <div class="card-body">华佗是古代名医，在当时就能藉麻醉法进行剖腹和挖眼球等外科手术。他观察五种飞禽的运动方法，创五禽术锻炼全身，到九十九岁仍然耳目不衰，齿牙不坏。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>华佗对导引法的认识：</strong>他说古传的导引法不外乎学熊双臂吊树以锻炼四肢，学猫头鹰环转头颈以活络颈项。他自己在此基础上创立了「五禽术」，观察五种飞禽的运动方法来锻炼自己，使身轻体健，精神爽快。</p>
+        <p><strong>同代人冷寿光：</strong>与华佗同时代的冷寿光，因为常作摇摆环转头颈运动和深呼吸，又深谙容成公的房中术，活到一百六十多岁，头发虽然斑白，气色望之仍似三四十岁人。</p>
+        <p><strong>太极拳与八段锦的源头：</strong>中国太极拳就是由华佗的五禽法演进而来，而五禽法又渊源于胎息法和导引法。这些功法对防治高血压、精神紧张、胃溃疡、心脏病以及许多慢性病和现代病极具功效，对于神经系统、循环系统、呼吸系统、消化系统和新陈代谢等方面均具效果。打太极拳、八段锦的练习要领是统一精神、集中意志，全身运动但呼吸不急促，保持有节奏的自然呼吸，并增加呼吸深度，每天履行不息。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch12-2: 胎息法 ==================== -->
+<section class="section" id="sec-taixi">
+  <h3>胎息法<span class="chapter-badge">第十二章</span></h3>
+  <p class="section-desc">把呼吸练回胎儿状态——极慢、极深、几乎不呼的闭气修炼</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 什么是胎息 -->
+    <div class="card" >
+      <div class="card-tag tag-type">核心概念</div>
+      <div class="card-title">什么是胎息：回到母体里的呼吸状态</div>
+      <div class="card-body">东晋葛洪在《抱朴子》中提出「胎息法」，核心理念是把呼吸方式练回胎儿在母体里的状态——极慢、极深、几乎不呼。减少呼吸频率，延长闭气时间，让精气储存在体内不外泄。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>核心理念：</strong>胎儿在子宫里不用肺呼吸，靠脐带获取氧气，代谢极低。胎息法当然不可能真的回到那个状态，但它追求的是同一个方向：减少呼吸频率，延长闭气时间，让精气储存在体内不外泄。</p>
+        <p><strong>历史案例——王真：</strong>后汉书记载，上党郡山西有位叫王真的人，年近百岁，面色红润光泽，望之不到五十。他的秘诀就是长期练习胎息法和胎食法（胎食法是不吃谷物，只吞咽舌下唾液）。王真能练到面容比实际年龄年轻一半。</p>
+        <p><strong>历史案例——郝孟节：</strong>王真同乡郝孟节，嘴里常含一枚大枣，坐定时气息停止、身体不动，不吃不喝，可以维持百日不动，形如死人。连他老婆都见惯不惊。曹操听说后，专门拜他做众方士的总监督。印度瑜伽术也有类似的人工冬眠——把呼吸时间拉长、脉搏缓慢、体温和血压下降，每日消耗极微体力，如此反复锻炼，可以身埋一个月不死。</p>
+        <p><strong>现代理解：</strong>这种极端的闭息功夫当然不是普通人的目标，但它说明人的呼吸潜力远比日常用到的大。普通人一分钟呼吸十二到二十次，练胎息法可以降到三到四次甚至更少。每一次呼吸的深度和含氧量，远远超过浅呼吸十几次的效果。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 练法 -->
+    <div class="card" >
+      <div class="card-tag tag-attr">练法步骤</div>
+      <div class="card-title">基础与进阶练法 + 与还精的关系</div>
+      <div class="card-body">基础：鼻吸→闭气默数三十→极缓慢吐气（吐少纳多）。进阶：闭气默数从三十增到六十、九十、一百二十乃至一千。关键要诀是吐气量始终少于吸气量。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>基础阶段：</strong></p>
+        <ul>
+          <li>环境安静，盘坐或仰卧，全身放松。</li>
+          <li>用鼻子缓缓吸气，意念将气引入丹田，小腹鼓起。</li>
+          <li>吸满后闭气，心中默数，从一数到三十。初期做不到三十，数到十五也行。</li>
+          <li>然后用鼻子极缓慢地吐气，吐出的气量要明显少于吸入的。想象丹田里留了一部分气没吐出来。</li>
+          <li>等气吐尽，自然再吸。反复循环。</li>
+        </ul>
+        <p><strong>进阶阶段：</strong>闭气默数从三十逐渐增加到六十、九十，最终目标是数到一百二十。据记载，勤练者能闭气默数到一千才吐气。到了这种境界，即能返老还童，永保青春。</p>
+        <p><strong>关键要领：</strong></p>
+        <ul>
+          <li>吐气量始终少于吸气量——这是胎息法区别于普通呼吸法的核心。「吐少纳多」的目的是积聚新鲜氧气和精气在体内，不是做有氧运动。</li>
+          <li>闭气时不要硬憋——感到胸闷就吐，循序渐进。硬憋会导致血压升高，适得其反。</li>
+          <li>呼吸要深长细微——初期可能每分钟五到六次，练到高阶每分钟一到两次就够了。</li>
+        </ul>
+        <p><strong>胎息法与还精的关系：</strong>古人说「还精补脑」，精液不泄，沿脊椎上行补益大脑。这个说法解剖学上站不住脚，但原理是对的。精液由尾闾（脊椎末端）经会阴、夹脊、玉枕上行至泥丸（大脑），这个路径对应的是「小周天」。小周天的修炼就是在静坐中配合胎息法，引导阳气沿这条路线循环：丹田→会阴→尾闾→夹脊→玉枕→泥丸→膻中→回到丹田。完整的循环通常需要两到三年的功夫才能打通。</p>
+        <p><strong>现代理解：</strong>胎息法的本质是训练自主控制呼吸肌和腹内压的能力。闭气时间越长，膈肌和腹横肌的力量越大，对内脏的按摩效果越强，对丹田区域的气血灌注也越充分。在房事中的直接效果：呼吸慢而不乱，精关自然紧固。这不是玄学，是呼吸节律对自主神经系统的直接调节。深长的呼吸激活副交感神经，抑制射精反射。现代性治疗学里的「停-动法」和「挤压法」，底层逻辑与此相通。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch12-3: 脚趾运动 ==================== -->
+<section class="section" id="sec-toe">
+  <h3>脚趾运动<span class="chapter-badge">第十二章</span></h3>
+  <p class="section-desc">经络从脚趾直通性器——脚趾的灵活性决定下半身的力量</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 经络连接+五趾五脏 -->
+    <div class="card" >
+      <div class="card-tag tag-type">经络原理</div>
+      <div class="card-title">脚趾→性器的经络链 + 五趾五脏对应</div>
+      <div class="card-body">古人发现：脚趾的筋，循踝、膝而上，经大腿、臀部，直通性器。脚趾屈伸机能不够，就会影响性器的强健，终致萎缩不振。这条路线在现代解剖学里有对应。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>经络连接线路：</strong>脚趾的筋，循踝、膝而上，经大腿、尻（臀部），直通性器。这条路线在现代解剖学里有对应：小腿和足底的肌肉、筋膜通过跟腱、腓肠肌、腘绳肌一路连接到骨盆底肌群，骨盆底肌群直接包裹和支撑着生殖器官。</p>
+        <p><strong>古人的结论：</strong>脚趾屈伸机能不够，就会影响性器的强健，终致性器萎缩不振。这不是迷信——脚趾无力的人，小腿肌群通常也弱，腘绳肌紧，骨盆底肌的控制力差，这些都会直接影响性功能。</p>
+        <p><strong>五趾与五脏的对应关系：</strong></p>
+        <ul>
+          <li>大拇趾 → 对应脾和肝</li>
+          <li>二趾 → 对应胃和心</li>
+          <li>中趾 → 对应胃和脾</li>
+          <li>无名趾 → 对应胆和肺</li>
+          <li>小趾 → 对应膀胱和肾</li>
+        </ul>
+        <p>性功能方面，与肾、肝的关系最密切。小趾和大拇趾的灵活性是重点观察对象——小趾僵硬、变形，提示肾气不足；大拇趾屈伸困难，提示肝经不畅。反过来，经常锻炼脚趾，疏通经络，内脏功能和性能力都会改善。</p>
+        <p><strong>肝经与性器的特殊关系：</strong>古人说「肝脏和脚筋有密切关系。一旦肝脏生病，脚趾便屈伸困难，连带影响到性器官，使性器萎缩不振。」肝主筋，肝经绕阴器。现代医学也证实，肝功能异常会影响性激素的代谢——肝脏是灭活雌激素的主要器官，肝不好，雌激素堆积，男性会出现性欲减退、勃起障碍。脚趾屈伸运动直接刺激的是足厥阴肝经的循行区域，从大拇趾外侧开始，沿足背上行，经过内踝，沿小腿内侧上行，绕过生殖器。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 练法+踝关节+女性 -->
+    <div class="card" >
+      <div class="card-tag tag-attr">练法步骤</div>
+      <div class="card-title">脚趾屈伸运动（基础/进阶）+ 踝关节 + 女性锻炼</div>
+      <div class="card-body">基础：蜷曲五秒→伸展五秒，二十次一组，每天三组。进阶：单独活动大拇趾和小趾，五趾分开。配合呼吸：蜷曲时吸气，伸展时吐气。随时可做，藏在鞋里别人看不见。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>基础练法：</strong></p>
+        <ul>
+          <li>坐在椅子上或床边，双脚平放地面。</li>
+          <li>先用力将全部脚趾向下蜷曲，像抓东西一样，保持五秒。</li>
+          <li>然后用力将全部脚趾向上翘起，尽量伸展，保持五秒。</li>
+          <li>蜷曲→伸展，反复做二十次为一组，每天做三组。</li>
+        </ul>
+        <p><strong>进阶练法：</strong></p>
+        <ul>
+          <li>单独活动大拇趾，其余四趾不动，大拇趾上下屈伸。</li>
+          <li>单独活动小趾，其余四趾不动，小趾上下屈伸。</li>
+          <li>五趾分开，尝试把每个脚趾独立地向不同方向活动。大多数人一开始做不到五趾分开，练几周就能逐渐控制。</li>
+        </ul>
+        <p><strong>与呼吸配合：</strong>蜷曲脚趾时吸气，气沉丹田。伸展脚趾时缓缓吐气。同时锻炼脚趾力量和腹式呼吸，一举两得。</p>
+        <p><strong>日常练习场景：</strong>不必专门找时间练。坐公交时、开会时、看电视时，脚藏在鞋里别人看不见。蜷曲、伸展、再蜷曲，随时可以做。</p>
+        <p><strong>踝关节旋转运动：</strong>坐着时把一条腿搭在另一条腿上，手扶脚掌，顺时针慢慢转动踝关节十五圈，再逆时针十五圈。然后换另一只脚。每天做两遍。踝关节僵硬，气血到这里就会堵塞。这个运动还能放松小腿肌群——小腿紧的人，骨盆底肌往往也紧，这是筋膜链的连锁反应。</p>
+        <p><strong>女性的脚趾练习：</strong>小腿粗短或萝卜腿的女子，性能力通常不强，原因是连络性器的脚筋受到拘束。补救方法一样——多做脚趾屈伸运动。女性更核心的锻炼是骨盆底肌控制。赵飞燕从小就练「行气之术」，快速舞步锻炼腰身，束紧腰带，用呼吸锻炼闭气止息力，把内力聚凝在拇趾，长期练习使阴部收缩力很强。</p>
+        <p><strong>女性骨盆底肌练法：</strong>吸气时放松骨盆底肌，吐气时收紧，像憋尿一样。每天练三组，每组收紧十秒、放松十秒，连续做十五次。脚趾运动配合骨盆底肌练习，内外兼修，效果更快。日常生活中如搭巴士时可以一边抓着扶手吊带，一边紧缩肛门的括约肌，一松一紧加以锻炼。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch12-4: 采阴补阳/采阳补阴 ==================== -->
+<section class="section" id="sec-cai">
+  <h3>采阴补阳 / 采阳补阴<span class="chapter-badge">第十二章</span></h3>
+  <p class="section-desc">呼吸法和还精法的终极应用——双方在交合中互相调动、互相滋养</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 概念+肉蒲团 -->
+    <div class="card" >
+      <div class="card-tag tag-type">理论概念</div>
+      <div class="card-title">采阴补阳与采阳补阴的概念 + 《肉蒲团》典故</div>
+      <div class="card-body">「采阴补阳」即吸入女性精气蓄于男子体内，又称「还精法」，是长寿秘法之一。「采阳补阴」则是男子泄精后，由女子吸入体内，成为女子的「还精法」与长寿法。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>采阴补阳：</strong>呼吸法和还精法的终极应用，吸入女性精气，蓄于男子体内，或称「还精法」，这是长寿秘法之一。核心操作：通过呼吸控制和体位配合，在交合中吸收对方能量而不泄自身精气。</p>
+        <p><strong>采阳补阴：</strong>使男子泄精后，加以储吸于女子体内，成为女子的「还精法」与长寿法。</p>
+        <p><strong>《肉蒲团》典故——名妓顾仙娘：</strong>清代小说《肉蒲团》里提到名妓顾仙娘吸取男人精液的秘诀：女子高潮时，把男人的龟头密接在阴道口，不让它摆动，把女子阴道口的小孔紧紧贴合，尽量把男人精液吸入体内。进入女子体内的精液，由尾闾（脊椎终点）游往上方，直抵小腹丹田。书中说这种效能不是人参、附子所能比拟。这便是女子的「采阳补阴法」。</p>
+        <p>男子精液由尾闾到丹田的现象，虽是传说的仙道行法，但在经验上说，这种方法也是可能的，因为瑜伽行者对此道苦修而成功者确有其人。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 现代理解 -->
+    <div class="card" >
+      <div class="card-tag tag-type">现代解读</div>
+      <div class="card-title">现代理解：抛开玄学看核心</div>
+      <div class="card-body">这些说法今天来看玄学成分很重，但核心逻辑实在：通过呼吸控制和体位配合，让双方在交合中互相调动、互相滋养，避免一方消耗一方被动的局面。这个思路放在任何时代的性关系里都是对的。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>玄学背后的实在逻辑：</strong>采阴补阳和采阳补阴的说法今天来看玄学成分很重，但核心逻辑是实在的——通过呼吸控制和体位配合，让双方在交合中互相调动、互相滋养，避免一方消耗一方被动的局面。这个思路，放在任何时代的性关系里都是对的。</p>
+        <p><strong>现代视角的转化：</strong></p>
+        <ul>
+          <li>不是真的「吸精气」，而是通过呼吸同步、节奏协调、情绪共鸣，达到双方的生理和心理高度契合。</li>
+          <li>男性学会控制泄精节奏，女性学会主动参与节奏，双方在交合中互相给予而非单向索取。</li>
+          <li>「还精补脑」的本质是：不泄精时，身体将精液的原料重新分解吸收，用于全身的修复和能量供应，这是一种生理上的资源再分配。</li>
+        </ul>
+        <p>抛开「采」「补」这两个充满神秘色彩的字，底层就是双向互动的性关系观，这在任何时代都是健康性关系的基础。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch12-5: 每日练习时间表 ==================== -->
+<section class="section" id="sec-schedule">
+  <h3>每日练习时间表<span class="chapter-badge">第十二章</span></h3>
+  <p class="section-desc">把呼吸、胎息、脚趾、骨盆底肌整合为每日可执行的计划</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 晨起+白天+晚间 -->
+    <div class="card" >
+      <div class="card-tag tag-attr">日常练功</div>
+      <div class="card-title">晨起、白天、晚间的完整时间表</div>
+      <div class="card-body">晨起十五分钟：仰卧腹式呼吸二十次 + 胎息法十次。白天随时：脚趾屈伸+踝关节旋转。晚间二十分钟：盘坐呼吸三十次 + 胎息法十次 + 骨盆底肌三组。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>晨起（十五分钟）：</strong></p>
+        <ul>
+          <li>仰卧腹式呼吸，二十次。气沉丹田，小腹鼓起，吐少纳多。</li>
+          <li>胎息法，十次。鼻吸默数到六十后吐气，初期从三十开始。</li>
+        </ul>
+        <p><strong>白天（随时）：</strong></p>
+        <ul>
+          <li>脚趾屈伸运动，随时可做。蜷曲五秒→伸展五秒，二十次一组。</li>
+          <li>排队、坐车、开会时，单独活动大拇趾和小趾。</li>
+          <li>踝关节旋转，顺时针十五圈，逆时针十五圈，每天两遍。</li>
+        </ul>
+        <p><strong>晚间（二十分钟）：</strong></p>
+        <ul>
+          <li>盘坐腹式呼吸，三十次。加深练习，默数到三十或更长。</li>
+          <li>胎息法，十次。逐步增加闭气默数，目标一百二十。</li>
+          <li>骨盆底肌练习，三组。收紧十秒→放松十秒，每组十五次。</li>
+        </ul>
+      </div></div>
+    </div>
+    <!-- Card 2: 交合时+进阶节奏 -->
+    <div class="card" >
+      <div class="card-tag tag-attr">实战应用</div>
+      <div class="card-title">交合时的呼吸组合 + 六到八周进阶节奏</div>
+      <div class="card-body">交合中四步：深吸缓吐气沉丹田→闭气默数三十换气→临界点时长吐气+咬牙+收腹→硬出软入死往生还。前两到三周建基础，四到八周日常呼吸模式自然变深变慢。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>交合时（实战四步）：</strong></p>
+        <ul>
+          <li>深吸缓吐，气沉丹田。</li>
+          <li>闭气默数三十换气。</li>
+          <li>快到临界点时，长吐气+咬牙+收腹。</li>
+          <li>硬出软入，死往生还，配合呼吸循环。</li>
+        </ul>
+        <p><strong>六到八周的进阶节奏：</strong></p>
+        <ul>
+          <li>前两到三周：先练晨起和白天的基础项目，建立呼吸和脚趾的肌肉记忆。</li>
+          <li>第四周开始：加入晚间的进阶胎息法和骨盆底肌练习。</li>
+          <li>六到八周后：日常呼吸模式会自然变深变慢，交合中的呼吸控制也会变得本能化，不再需要刻意数数。</li>
+        </ul>
+        <p><strong>合理预期：</strong>「十天见效」是古人对天赋异禀且每天苦练的人说的。普通人体质不同，起步不同，给自己三到六周的时间建立基础，两到三个月看到明显进步，这才是合理的预期。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch12-6: 五个字总结 ==================== -->
+<section class="section" id="sec-five">
+  <h3>五个字总结：沉蓄控通合<span class="chapter-badge">第十二章</span></h3>
+  <p class="section-desc">素女说「练气数行，去故纳新，以自助也」——功夫在床下练，用在床上</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 五个字详解 -->
+    <div class="card" >
+      <div class="card-tag tag-type">核心要义</div>
+      <div class="card-title">沉、蓄、控、通、合——五个字的完整释义</div>
+      <div class="card-body">丹田呼吸练「沉」，胎息法练「蓄」，交合呼吸练「控」，脚趾运动练「通」，采阴补阳练「合」。五字各对应一个功法，合起来就是整个第十二章的骨架。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>沉——丹田呼吸练出来的：</strong>气往下沉，力往下沉，兴奋不往上冲。腹式呼吸训练的核心就是把呼吸从胸腔拉到腹腔，把兴奋的上升趋势压下去。丹田气稳，腰胯才能有节律地动，不会一上来就喘、乱、泄。</p>
+        <p><strong>蓄——胎息法练出来的：</strong>气蓄在体内，精蓄在丹田，吐少纳多。减少呼吸频率，延长闭气时间，把精气储存在体内不外泄。这和运动员的核心力量训练一个道理——把能量蓄在身体中心，用的时候才爆发。</p>
+        <p><strong>控——交合中的呼吸技巧练出来的：</strong>控节奏、控兴奋、控精关。深吸缓吐稳呼吸，闭气默数拉长周期，长吐气+咬牙+收腹应急。三招可单独用也可组合用，从被快感带着跑变成主动驾驭快感。</p>
+        <p><strong>通——脚趾运动练出来的：</strong>经络通畅，从脚趾到性器，气血一路通到底。脚趾屈伸+踝关节旋转+骨盆底肌练习，从末端往上疏通，让下半身的气血通道不堵塞。</p>
+        <p><strong>合——采阴补阳练出来的：</strong>双方在交合中互相调动、互相滋养。不是一方索取一方承受，而是通过呼吸同步和节奏协调，达到身心的双向互动。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 五字体系总结 -->
+    <div class="card" >
+      <div class="card-tag tag-type">体系整合</div>
+      <div class="card-title">呼吸是发动机，导引是传动轴，还精是输出</div>
+      <div class="card-body">素女说「练气数行，去故纳新，以自助也」。房中术的修炼，呼吸是发动机，导引是传动轴，还精是最终的输出。没有呼吸控制，一切技巧都是空中楼阁。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>完整的功法体系图：</strong></p>
+        <ul>
+          <li><strong>发动机：</strong>丹田呼吸+胎息法 → 提供持续的动力源</li>
+          <li><strong>传动轴：</strong>导引法+脚趾运动 → 把动力传送到全身</li>
+          <li><strong>输出：</strong>还精法（触而不泄）+ 采补法 → 在交合中实现</li>
+        </ul>
+        <p><strong>五个字的练习优先级：</strong>沉（先练，建立呼吸基础）→ 蓄（其次，加深闭气能力）→ 通（同时练，疏通经络）→ 控（上床时实战应用）→ 合（最终境界，双方共鸣）。</p>
+        <p><strong>总纲：</strong>功夫在床下练，用在床上。如果只在交合时才想起呼吸控制，就像运动员只在比赛时才想起练核心力量——来不及。日常每天半小时的呼吸和脚趾练习，才是持久力的真实来源。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /health-practice -->
+
+<!-- TAB 2: 知识自检 -->
+<div id="health-knowledge" class="health-section">
+
+<!-- Frequency comparator -->
+<h3 id="health-freq">泄精频率：三个版本对照</h3>
+<p class="section-desc">选择年龄段，看素女经（强/弱两档）、玉房秘诀（一刀切）、千金方（最保守）三个版本的建议。古人婚龄早，表中为古籍原始口径，不适用于未成年人。</p>
+<div class="freq-selector" id="freq-age-selector" role="tablist" aria-label="选择年龄段"></div>
+<div class="freq-data" id="freq-display"></div>
+
+<!-- Self-check -->
+<h3>两性健康常识</h3>
+<p class="section-desc">疼痛、高潮障碍、口交、浴后时机、生理周期——日常细节决定性生活质量。</p>
+<div class="card-grid cols2">
+  <div class="card" >
+    <div class="card-tag tag-alert">疼痛</div><div class="card-title">性交疼痛常见原因</div><div class="card-body">前戏不充分是最常见原因。女方从唤起到完全润滑需要时间，短则几分钟长则十几分钟。天然润滑不够时用润滑剂或唾液辅助。</div>
+    <div class="expand-panel"><div class="prose"><p>第一次性经验时处女膜破裂和阴道扩张会有轻微疼痛和少量出血——正常。关键是男方足够温柔。如果痛感强烈必须立刻停止。</p><p>深处疼痛往往是阴茎推送时刺激到子宫颈甚至牵连卵巢。换个姿势通常能改善，侧卧位或女上位让女方完全控制深度和角度。持续疼痛或性交后经常出血应看医生。</p><p><strong>阴茎太大的问题：</strong>正常阴道完全可以适应各种尺寸。真正的问题往往是阴道口周围环状肌肉不自主痉挛——阴道痉挛。绝大多数可通过七步方案自愈：认识身体→热水澡放松→水中探索→练习放松→伴侣参与→尝试性交→善待自己。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-type">高潮</div><div class="card-title">女性高潮障碍</div><div class="card-body">没有人可以「给」你高潮。精神上和肉体上必须全然放松才能如愿。越努力越难——高潮是紧绷后的释放。</div>
+    <div class="expand-panel"><div class="prose"><p>首次高潮经验多来自自慰而非做爱——正常。自慰探索步骤：选私密时刻→不设目标→从肩膀手臂开始→慢慢触摸大腿内侧→找出阴蒂位置→轻柔摩擦→关注身体感受→不追结果。</p><p>知道那是什么感觉之后，教导伴侣怎么进行。男人天生不是做爱高手。引导伴侣找出最令自己满足的方式。不好意思说出来，握住对方的手带路即可。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-type">口交</div><div class="card-title">口交的正确认知</div><div class="card-body">中国古代房中术里口交被称为「含阴」「吹箫」「吹笙」。口腔黏膜柔软光滑，舌头灵活，对阴茎的刺激效果非常强烈。</div>
+    <div class="expand-panel"><div class="prose"><p>精液主要成分是蛋白质、少量果糖和水分，没有特殊营养价值也不会对身体有害。吞精纯粹是个人选择。口交的实际用途：前戏激发性兴奋、经期替代方式、无避孕措施时的安全选择、阴道感染时避免加重症状。</p><p>底线：必须以双方自愿为前提。强迫不仅不增进感情，连正常的性生活都会受影响。只要双方没有生殖器疾病、事前清洗干净，不存在不卫生的问题。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-type">周期</div><div class="card-title">生理周期四阶段</div><div class="card-body">经前2-3天性欲最旺盛。经期不建议阴道性交。经后一周内可大胆尝试更深体位。排卵期前后是本能觉醒阶段。</div>
+    <div class="expand-panel"><div class="prose"><p><strong>经前期：</strong>性欲最旺，激素变化让女性对性刺激格外敏感。用温和节奏，女性主控体位。<br><strong>月经期：</strong>子宫颈口开放，感染风险大，不进行阴道性交。口交是合适替代。<br><strong>经后一周：</strong>解放感+身体恢复，可加强视觉刺激、尝试更深体位。<br><strong>排卵期：</strong>本能觉醒的高峰。粗暴脱衣、直接性器爱抚反而更能调动兴奋。站立体位或背后体位配合激烈动作与温柔交替。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-alert">过度</div><div class="card-title">性生活过度的信号</div><div class="card-body">简单标准：看第二天状态。精神饱满工作有劲=适度。精神不振头昏心慌=过度。女性过度同样损害健康。</div>
+    <div class="expand-panel"><div class="prose"><p>女性性生活过度症状：腰酸腿软、眼花、精神不振、食欲不佳、白带增多、尿频尿急。性交是全身性综合反应——中枢神经、植物神经、交感和副交感神经全部参与。</p><p>多次性爱对女性的影响取决于是否达到高潮。每次都能高潮=对身体无不利影响。每次都停在平台期=盆腔充血需4-6小时消退，久而久之可能盆腔淤血、下腹坠胀、痛经。</p></div></div>
+  </div>
+</div>
+
+<!-- 13个不要 -->
+<h3 id="health-donts">13个不要</h3>
+<div class="card-grid cols3">
+  <div class="card" ><div class="card-title">不要带病过性生活</div><div class="card-body">正患有严重器质性疾病且医生已嘱咐不能过性生活的，不要勉强。传染性结核病、性病期间，必须停止性交。</div><div class="expand-panel"><div class="prose"><p>身体在对抗疾病的时候，正气全部用来抗邪，没有余力分给房事。这不是建议，是硬性底线。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要疲劳性交</div><div class="card-body">性生活要消耗体力和精力，精神或身体疲惫时往往达不到高潮，双方都不满意。</div><div class="expand-panel"><div class="prose"><p>特别是劳累后立刻行房，会损害健康。忙了一天先休息，恢复精力后再来。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要心情不好时勉强</div><div class="card-body">一方情绪不佳时勉强进行，不仅无法和谐，还会让情绪不好的一方产生反感。</div><div class="expand-panel"><div class="prose"><p>如果反复发生，会导致女方性冷淡或男方阳痿。情绪不对，身体也不听使唤，硬来只会把两个人都搞伤。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要经期过性生活</div><div class="card-body">月经期间子宫颈口开放，这时性交极易感染，导致子宫或附件发炎。</div><div class="expand-panel"><div class="prose"><p>这不是保守，是基本的生理卫生常识。经期忍几天，对双方都好。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要酒后性交</div><div class="card-body">有人觉得酒后能「提高质量」，其实恰恰相反。大量饮酒后阴茎勃起不坚或早泄，妨碍和谐。</div><div class="expand-panel"><div class="prose"><p>更严重的是，酒后受孕对胎儿发育可能产生不利影响。想喝就少喝两杯助兴，醉了就老实睡觉。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要不讲卫生</div><div class="card-body">环境脏乱影响精神状态，干扰性生活质量。性器官不清洁会把细菌带入对方体内。</div><div class="expand-panel"><div class="prose"><p>性交前清洗下身，不仅有益健康，也有助于双方更放松地投入。干净是最低成本的前戏。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要男尊女卑</div><div class="card-body">男方在性生活中为所欲为，不尊重女方的感受和自尊心，不仅破坏感情，还会使女方产生厌恶感。</div><div class="expand-panel"><div class="prose"><p>最终导致性冷淡，甚至导致夫妻关系破裂。性生活是两个人的事，一方爽一方受罪那不叫交合叫施暴。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要匆忙了事</div><div class="card-body">不懂女性生理特点，不做好准备工作就急于性交，或因时间仓促草草结束——女性性冷淡的最主要原因之一。</div><div class="expand-panel"><div class="prose"><p>女性的唤起比男性慢得多。前戏不是可选项，是必要条件。急着进去，她还没准备好，疼的是她，坏的是关系。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要饱食或饥饿时性交</div><div class="card-body">饱食后胃肠道充盈并充血，大脑及全身其他器官的血液供应不足，不宜饭后立刻行房。</div><div class="expand-panel"><div class="prose"><p>饥饿时体力下降、精力不充沛，同样不容易达到满意效果。吃饱等一两个小时，饿了先垫点东西，别硬撑。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要过度紧张或羞怯</div><div class="card-body">精神极度紧张或过于羞怯，容易导致男方早泄或女方疼痛，影响快感。</div><div class="expand-panel"><div class="prose"><p>保持轻松愉快的心情，性生活才能和谐美满。紧张的时候肌肉收缩、感觉变钝，快感打了折扣。放松比任何技巧都重要。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要浴后立即行房</div><div class="card-body">热水洗澡后全身皮肤广泛充血，大量血液涌向体表。性器官和皮肤争抢血液，影响性功能和健康。</div><div class="expand-panel"><div class="prose"><p>血液循环分配矛盾：皮肤和性器官同时需要大量血液，两头抢，两头都供应不足。解决方案：睡前洗澡先睡一觉凌晨再进行，或先性生活事后洗澡。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要产后过早行房</div><div class="card-body">产后子宫还没有完全恢复时过早进行性生活，容易造成子宫复旧不良和子宫出血。</div><div class="expand-panel"><div class="prose"><p>至少等六到七周，等医生确认恢复后再开始。心急吃不了热豆腐，这个时间省不得。</p></div></div></div>
+  <div class="card" ><div class="card-title">不要「五更色」</div><div class="card-body">「五更色」指的是黎明前过性生活。此时行房，双方都得不到充分休息，机体平衡失调，抵抗力下降。</div><div class="expand-panel"><div class="prose"><p>也会影响白天的工作和学习效率。真想过，睡饱了白天来，比摸黑撑着强。</p></div></div></div>
+</div>
+
+<!-- 受孕与择偶 -->
+<h3>受孕与择偶</h3>
+<div class="card-grid cols2">
+  <div class="card" >
+    <div class="card-tag tag-type">时机</div><div class="card-title">受孕三要素</div><div class="card-body">经后三天、丑时（凌晨1-3点）行事、浅进易受孕。素女说「常乘生气」——在生命力最旺盛的时候做这件事。</div>
+    <div class="expand-panel"><div class="prose"><p><strong>经后三天：</strong>子宫内膜刚脱落完毕开始重新生长，胞宫既空且暖——空则能容，暖则能养。过了窗口期气血向外疏散，受孕概率下降。</p><p><strong>丑时行事：</strong>凌晨1-3点是肝经流注时辰，气血集中灌入肝脏。子时（23-1点）一阳初生，到丑时阳气蓄积但未外散——男子精气充盈，女子血归胞宫。</p><p><strong>浅进：</strong>浅入则精液集中在宫颈口附近，更容易进入子宫。深刺让精液送到阴道后穹窿反而离宫颈口远了。体位建议女方仰卧臀部垫高，交合后保持姿势不动。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-type">择偶</div><div class="card-title">身体五字诀：白·鼓·软·红·紧</div><div class="card-body">古人择偶有一套实用判断体系：白（皮肤润泽）、鼓（耻丘丰满骨盆宽）、软（筋骨柔韧）、红（唇面色润）、紧（阴道紧致）。</div>
+    <div class="expand-panel"><div class="prose"><p><strong>白：</strong>皮肤润泽有光泽说明气血通畅。追求的是光泽不是白度本身。<br><strong>鼓：</strong>耻丘丰满骨盆宽厚——在古代骨盆窄=难产=九死一生。<br><strong>软：</strong>筋骨柔韧说明肝气条达经络通达。<br><strong>红：</strong>唇红面润是气血充盛最直接的外在标志。发紫=心脏有问题，发白=血虚。<br><strong>紧：</strong>阴道紧致说明肾气充足收摄有力。松弛往往意味肾气不足或生育过多损耗先天之本。</p><p>素女说：「虽不行法，得此人，由不为损」——选对人，方法次之。人选的重要性在方法之上。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-type">面相</div><div class="card-title">面相四字诀：眉清·目秀·唇红·齿白</div><div class="card-body">不用脱衣服就能判断的气血状态。眉清=肝气条达。目秀=肝肾充足。唇红=气血充盛。齿白=肾气足。</div>
+    <div class="expand-panel"><div class="prose"><p><strong>眉清：</strong>眉毛清晰有序不浓不淡。一字眉=性格直板缺乏情趣，连心眉=精力不足神经过敏。眉毛丛生浓淡得宜有层次感的最懂阴阳之道。<br><strong>目秀：</strong>瞳仁端正目光清澈黑白分明。下三白眼的女人看着有媚态实际上消耗男人精气。<br><strong>齿白：</strong>齿为骨之余，肾主骨。牙齿好=肾气足=精力旺盛生育能力强。<br>素女加了一条：天性婉顺、气声濡行——性情温和声音润泽。</p></div></div>
+  </div>
+  <div class="card" >
+    <div class="card-tag tag-alert">禁忌</div><div class="card-title">不宜受孕的日子</div><div class="card-body">雷电风雨之日、日食月食期间、醉酒后、节气交替时（四立+二分二至）——古代禁忌背后是「选在双方状态最好的时候」。</div>
+    <div class="expand-panel"><div class="prose"><p>素女经提到的禁忌日期虽有浓重迷信色彩，但核心原则是对的：天地之气剧烈变动时人体气血紊乱。醉酒受孕影响胎儿发育已为现代医学证实。</p><p>古人的底线：「若夫妇俱老，虽生化有子，皆不寿。」一个人老可以，不能两个人都老。一方年轻气血旺盛可以弥补另一方不足。双方都衰了，生出来的孩子先天就亏。</p></div></div>
+  </div>
+</div>
+
+</div><!-- /health-knowledge -->
+
+<!-- TAB 3: 常见问题 -->
+<div id="health-sexhealth" class="health-section">
+<p class="section-desc">早泄、迟泄、勃起障碍——这些是最常被误解也最常被回避的问题。科学定义、真实原因、可执行的对策。</p>
+
+
+<!-- ==================== Ch13-1: 早泄的真正定义 ==================== -->
+<section class="section" id="sec-pe">
+  <h3>早泄的真正定义<span class="chapter-badge">第十三章</span></h3>
+  <p class="section-desc">大多数男人以为自己早泄，其实不是——这是性学领域被误解最深的概念之一</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 定义+误判 -->
+    <div class="card" >
+      <div class="card-tag tag-type">诊断标准</div>
+      <div class="card-title">三种真早泄 + 常见误判 + 时间参考</div>
+      <div class="card-body">真正的早泄只有三种：插入即泄、插入一两下即泄、未插入即泄。关键词是「极早期」。「无法支撑到妻子高潮」不叫早泄，是协调问题。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>真正的早泄——三种情况：</strong></p>
+        <ol>
+          <li>阴茎刚插入阴道就射精。</li>
+          <li>插入动作只做了一两下就射精。</li>
+          <li>阴茎还没有插入、甚至还在勃起的一瞬间就开始射精。</li>
+        </ol>
+        <p>这三种情况，才是名副其实的早泄。关键词：<strong>极早期</strong>。不是「比妻子先高潮」，不是「妻子还没到我就射了」。</p>
+        <p><strong>「无法支持到妻子高潮」不叫早泄：</strong>这种现象的真正原因是夫妻协调不足——丈夫在技巧和经验上还不够，缺乏控制节奏的意识，不知道怎么配合妻子的兴奋曲线。这不是病，是技术问题。但如果男人因为这个给自己贴上「早泄」的标签，产生心理暗示和焦虑，时间一长，假早泄就可能变成真早泄，甚至进一步发展成勃起障碍。恐惧导致焦虑，焦虑导致失败，失败加深恐惧，恶性循环。</p>
+        <p><strong>常见误判——把前列腺液当成精液：</strong>性兴奋时，尿道口会渗出少量透明黏液，来自尿道旁腺（巴氏腺），这是正常的生理反应，不是射精。不少夫妻就此误判，妻子以为丈夫「不争气」，丈夫以为自己「又泄了」，白白制造了一场信任危机。</p>
+        <p><strong>关于时间的参考数据：</strong>以不间断的连续刺激来说，从插入到射精，最少一分钟以上，平均三分钟左右。如果中间有适当的停顿和节奏变化，加上意识调控，持续十分钟到三十分钟甚至更久都有可能。所以三分钟就射了，完全在正常范围内，不必焦虑。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 因素+延迟四法 -->
+    <div class="card" >
+      <div class="card-tag tag-attr">应对方法</div>
+      <div class="card-title">包皮因素 + 心理因素 + 延迟射精四法</div>
+      <div class="card-body">生理因素：包茎导致龟头过度敏感。心理因素：负罪感、焦虑、恐惧等。延迟四法：体位变换法、意识转移法、间歇法、深浅配合法。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>生理因素——包皮问题：</strong>龟头表面覆盖着极薄的黏膜状皮肤，感觉神经极其密集。在发育期，龟头长期被包皮覆盖，没有经过衣物摩擦的脱敏，婚后初次暴露时极度敏感。如果男性婚后仍处于包茎状态，勃起后露出的龟头比正常男性更敏感，稍有接触刺激就直达射精阈值。</p>
+        <p><strong>解决办法：</strong>青春期就应该养成包皮后翻的习惯，让龟头逐步适应外界摩擦。如果是真性包茎（勃起时包皮完全不能后翻），建议尽早做包皮环切手术。严重的包茎若不处理，反而对刺激极为迟钝，对女性方面也减低兴趣。所以包皮过长或包茎，总以早请医生手术为妙。</p>
+        <p><strong>心理因素：</strong>对自慰行为长期怀有负罪感、对性能力缺乏自信、对女性过度崇拜或厌恶、对怀孕的恐惧、宗教戒律与性欲的冲突、性交环境的不适（怕被窥视、怕有噪音）。这些需要针对性地建立正确认知，严重的要找专业人士做心理咨询。</p>
+        <p><strong>延迟射精四法：</strong></p>
+        <ul>
+          <li><strong>体位变换法：</strong>夫妻间往往有些体位使男方比女方更受刺激，另一种体位却恰恰相反。丈夫应选择减少自己刺激而对妻子有极大刺激的体位。哪种体位有理想妙用因人而异，要在平时的性生活中去体验总结。</li>
+          <li><strong>意识转移法：</strong>算一算数字，或在思考中临时找一点小事情轻轻在脑际掠过，使自己对性交运动的反应迟钝一些。前提是知道自己不是神经质的人——神经质的男性可能在意识转移过程中勃起不完全或萎缩，那就弄巧成拙了。</li>
+          <li><strong>间歇法：</strong>在性交运动中保持一些间歇的动作，即略作短时间的停顿。这种短暂的停顿使妻子有间隔的休息，便愈加期待和焦急，因而促进了她的性兴奋。但间歇时间不能太长，否则妻子的兴奋会冷却。最好在间歇时施以其他爱抚刺激，以保持妻子的兴奋持续乃至昂进。</li>
+          <li><strong>深浅配合：</strong>浅近的插入或徐缓的运动并不一定是弱刺激，因为龟头冠受到刺激时引起的反应很强。为了延迟射精，徐缓的前进、急速的后退倒是好办法——这种运动方式使妻子所受的刺激比丈夫为大，可协调夫妻俩高潮的一致。但不可使龟头冠滑出阴道口。</li>
+        </ul>
+        <p><strong>前提条件：</strong>首先要有坚定的自信，与妻子共谋高潮一致。如果夫妻经验不够，最好预先约定一个表达信号，妻子把快感高潮即将来临的消息向丈夫发出通告。</p>
+        <p>有人总结：女人需要「绵羊」「小狗」「老虎」三种个性的丈夫——第一要像绵羊般驯善，第二要像小狗般亲热，第三要像老虎般凶猛。老虎般的凶猛只有在性交的最后阶段才是极需要的，前面的阶段要温柔有耐心。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch13-2: 迟泄 ==================== -->
+<section class="section" id="sec-delay">
+  <h3>迟泄<span class="chapter-badge">第十三章</span></h3>
+  <p class="section-desc">另一个被忽视的极端——危害比早泄更大，因为它让痛苦持续更久</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 定义+原因 -->
+    <div class="card" >
+      <div class="card-tag tag-type">诊断定义</div>
+      <div class="card-title">什么是迟泄 + 怎么来的</div>
+      <div class="card-body">性交持续超过一小时以上，双方仍无法达到快感高潮，或虽有少许快感但精液射不出来，即为迟泄。最常见原因是延迟射精训练过了头——刹车踩太久，想松时刹车片已经粘住了。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>迟泄的定义：</strong>性交持续超过一小时以上，夫妻双方仍然无法达到快感高潮，或者虽有少许快感但精液射不出来。古人叫「迟精」。</p>
+        <p><strong>迟泄怎么来的：</strong></p>
+        <ul>
+          <li><strong>最常见的成因：</strong>延迟射精训练过了头。男人为了「表现更好」，长期用意识转移法——想别的事情、算数字、分心，或者刻意用减少刺激的体位和动作。时间一长形成习惯，想射却射不出来了。就像刹车踩太久，想松开却发现刹车片已经粘住了。</li>
+          <li><strong>另一个原因：</strong>过度追求「长时间性交」的虚荣。有人把交合一小时不射当作能力的证明，实际上这已经偏离了正常的性反应周期。</li>
+        </ul>
+      </div></div>
+    </div>
+    <!-- Card 2: 伤害+纠正 -->
+    <div class="card" >
+      <div class="card-tag tag-alert">伤害与纠正</div>
+      <div class="card-title">对双方的伤害 + 纠正方法</div>
+      <div class="card-body">妻子经历：期待→焦急→勉强→厌烦→失望→痛苦。丈夫：想射射不出，体力耗尽，挫败感积累成心理障碍。纠正：停掉所有延迟训练，选对男性刺激最大的体位，以阴道口为界进出运动。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>对妻子的伤害——六阶段崩溃：</strong>期待→焦急→勉强→厌烦→失望→痛苦。她一直在等待丈夫的射精来共同迎接高潮，等得越久，身体从兴奋转为不适，心理从期待转为怨恨。最终不是她先高潮（那样她会有内疚），就是她忍到结束身心俱疲。无论哪种结果都不是她想要的。</p>
+        <p><strong>对丈夫的伤害：</strong>想射射不出，拼命加速运动，越急越射不出来，体力耗尽后不得不停止。一次不完整的性交，没有高潮、没有释放，只有疲惫和挫败感。更糟糕的是，这种失败经历会积累成心理障碍，最终可能走向真正的性无能。</p>
+        <p><strong>纠正方法：</strong></p>
+        <ul>
+          <li><strong>首先要停掉</strong>所有延迟射精的训练和分心技巧。找回自然的射精反射，比维持任何性交时间的记录都重要。</li>
+          <li><strong>选择对男性刺激最大的体位</strong>，特别是让龟头冠（龟头下方神经最密集的冠状沟）充分受到摩擦刺激的体位。</li>
+          <li><strong>在阴道口附近做进出运动</strong>，利用最敏感区域的集中刺激来唤起射精反射。不要急速凌乱地运动，那反而会降低效果。</li>
+          <li>选择最能刺激自己的体位，特别是对龟头冠施以强烈刺激，以阴道口为界进出运动，往往能促进射精。</li>
+        </ul>
+        <p><strong>重要认知：</strong>迟泄不是「持久」，是功能障碍。一个健康的性反应周期，应该有自然的兴奋→平台→高潮→消退过程，任何环节被人为卡住太久，都会变成病理状态。延迟射精的训练是一把双刃剑，用过头了比不用更糟。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch13-3: 勃起障碍 ==================== -->
+<section class="section" id="sec-ed">
+  <h3>勃起障碍<span class="chapter-badge">第十三章</span></h3>
+  <p class="section-desc">偶尔的不举是正常的——恐惧比疾病本身更可怕</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 原因+冷水疗法 -->
+    <div class="card" >
+      <div class="card-tag tag-alert">病因与疗法</div>
+      <div class="card-title">后天性阳痿的原因 + 冷水疗法</div>
+      <div class="card-body">病因：生殖器疾病、勃起中枢兴奋性缺乏、反射神经障碍、手淫和性交过多致麻痹性阳痿。冷水疗法：神经性阳痿者常以冷水毛巾洗擦阴部，通过温差刺激激活自我修复。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>后天性阳痿的原因：</strong></p>
+        <ul>
+          <li><strong>生理层面：</strong>生殖器疾病的反常、勃起中枢兴奋性的缺乏、反射神经的障碍。尤其因手淫和性交过多，勃起和射精中枢失去了兴奋作用，发生麻痹性阳痿。</li>
+          <li><strong>精神层面：</strong>惊悸、苦虑、羞耻、激怒、恐怖等强烈的精神感动都可能导致阳痿。恐惧比疾病本身更可怕。</li>
+        </ul>
+        <p><strong>治疗原则：</strong>治疗阳痿不是药物问题，是时间问题。马钱子一般人以为是治疗良药，其实它对性器官及中枢神经只有刺激作用——如果本来是兴奋过度的阳痿，用它比不用更坏。治疗之先必须了解致萎的原因。医疗期间慎守摄生规则：有刺激的食物如油、酒、辣椒等应完全禁绝，多食蛋白质和富有营养的食物。神经性阳痿患者应把生活弄得很有规律，每晨作适当运动，选择清淡食物，避免身心过于疲劳。</p>
+        <p><strong>冷水疗法：</strong>神经性的阳痿患者，经常以冷水毛巾洗擦阴部，也是有效的疗法。冷水刺激能增强局部血液循环，提高神经敏感度。这种做法跟运动员用冰敷来促进恢复是一个道理——通过温差刺激激活身体的自我修复机制。</p>
+        <p><strong>辅助方法：</strong>性器接吻（用嘴去吻性器），对性的刺激是十分热烈的。在伴侣之间，这种方法可以作为帮助克服勃起障碍的辅助手段，关键是要在完全信任和自愿的前提下进行。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 核心逻辑 -->
+    <div class="card" >
+      <div class="card-tag tag-type">核心逻辑</div>
+      <div class="card-title">恐惧本身才是最大的病因</div>
+      <div class="card-body">偶尔的勃起不全是正常现象，任何人在漫长婚姻岁月中都会遇到。这时候应该让丈夫充分休息，不宜勉强施行性交。尤其不要表示不满或随便批评——伤了自尊心，生理上的偶然不振可能发展成心理上的长期障碍。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>核心逻辑：</strong>身体的偶尔失灵是正常的，但如果陷入恐惧和焦虑，恐惧本身就会变成最大的病因。男方需要理解不应期是生理现象，女方需要理解这不是不爱的表现。两个人一起面对，比一个人独自焦虑有效一百倍。</p>
+        <p><strong>妻子应该怎么做：</strong>在这种时候，应该让丈夫充分休息，不宜勉强施行性交。尤其不要表示不满甚至随便批评。伤害了自尊心，可能使他从生理上的偶然不振，发展成心理上的长期障碍。</p>
+        <p><strong>丈夫应该理解什么：</strong>偶尔的勃起不完全是正常现象，精神或肉体上的条件一时不济就可能出现。任何人在漫长婚姻岁月中都会遇到这种情况。这时候不管妻子如何爱抚刺激，总达不到性器结合的目的——这不是你「不行了」，只是身体今天不在状态。</p>
+        <p><strong>治疗原则总结：</strong></p>
+        <ul>
+          <li>先了解致萎原因，不盲目用药。</li>
+          <li>生活规律化：每晨适当运动，清淡饮食，避免身心过于疲劳。</li>
+          <li>禁绝刺激食物：油、酒、辣椒等。</li>
+          <li>伴侣共同面对，不互相指责。</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== Ch13-4: 淫羊藿/仙灵脾酒 ==================== -->
+<section class="section" id="sec-yinyanghuo">
+  <h3>淫羊藿 / 仙灵脾酒<span class="chapter-badge">第十三章</span></h3>
+  <p class="section-desc">古人的「媚药之王」——从牧羊人的偶然发现到蔡一藩经典处方</p>
+  <div class="card-grid cols2">
+    <!-- Card 1: 发现+药理 -->
+    <div class="card" >
+      <div class="card-tag tag-type">发现故事</div>
+      <div class="card-title">牧羊人的偶然发现 + 药理机制</div>
+      <div class="card-body">蔡一藩记录：牧羊人发现一只公羊一天交配上百次，调查后发现这只羊总吃同一种草，自己试吃后欲火大增。这就是淫羊藿的名字由来。现代药理：含淫羊藿苷(icariin)，能促进NO释放、扩张血管、改善海绵体充血。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>发现故事（蔡一藩记录）：</strong>有个牧羊人发现羊群里一只公羊一天交配上百次，大为吃惊，多方调查后发现这只羊总是吃同一种草。牧羊人自己试着吃了，结果欲火大增。这种草就是淫羊藿。中国有句老话说「连羊吃了淫羊藿也会热衷于交接」，名字就是这么来的。</p>
+        <p><strong>动物实验验证：</strong>老鼠和兔子服用淫羊藿提取物后，交配行为明显增强。日本也有一种类似淫羊藿的药草叫「碇草」，制成生药后一直被认为是媚药之王。</p>
+        <p><strong>历史案例——小林一茶：</strong>日本俳人小林一茶五十二岁新婚，妻子菊女二十八岁。他在日记里记录性生活相当坦率，八月八日到二十一日之间，几乎每天三到五次。一茶曾因性无能而服用淫羊藿当做催淫剂，吃了之后精液变浓、精量增加，对防止老化衰退也很有效果。五十四岁的男人能做到这个频率，淫羊藿的助力不可忽视。</p>
+        <p><strong>现代药理机制：</strong>淫羊藿在中药里归肝肾经，性温味辛甘，功效是补肾壮阳、祛风除湿。现代药理研究发现它含有淫羊藿苷（icariin），能促进一氧化氮释放、扩张血管、改善海绵体充血，同时对下丘脑-垂体-性腺轴有调节作用，能提升睾酮水平。古人说的「催淫」，现代科学的解释就是改善了性功能的血管和内分泌基础。</p>
+      </div></div>
+    </div>
+    <!-- Card 2: 处方+保肾丸+注意事项 -->
+    <div class="card" >
+      <div class="card-tag tag-attr">处方剂量</div>
+      <div class="card-title">蔡一藩处方：基础方 + 仙灵脾酒 + 保肾丸 + 注意事项</div>
+      <div class="card-body">基础煎剂：淫羊藿20g+茯苓10g+大枣3枚。仙灵脾酒（主力）：淫羊藿60g+茯苓30g+大枣9枚，蒸晒三次后浸酒加蜂蜜100g，密封一个月，每睡前饮一小杯(20-30ml)。</div>
+      <div class="expand-panel"><div class="prose">
+        <p><strong>注意：以下处方仅供了解古人用药思路，实际使用前必须咨询中医师。</strong></p>
+        <p><strong>基础方（煎剂）：</strong></p>
+        <ul>
+          <li>淫羊藿20克</li>
+          <li>茯苓10克</li>
+          <li>大枣3枚</li>
+          <li>加水三合半（约530毫升），小火煎至一合（约150毫升），去渣温服。</li>
+          <li>这是日常的强精强壮药，药性平和，适合长期服用。</li>
+        </ul>
+        <p><strong>仙灵脾酒（酒剂，蔡一藩推荐的主力处方）：</strong></p>
+        <ul>
+          <li>淫羊藿60克、茯苓30克、大枣9枚（即基础方三倍量）</li>
+          <li>制作步骤：</li>
+          <li>1. 先好好地蒸透，然后摊开晒干。</li>
+          <li>2. 再蒸，再晒干。</li>
+          <li>3. 反复蒸晒三次。</li>
+          <li>4. 蒸晒完成后，浸入适量烧酒（高粱酒或米酒均可，度数30-40度为宜）。</li>
+          <li>5. 加入蜂蜜100克。</li>
+          <li>6. 密封存放一个月后开封饮用。</li>
+          <li>每晚睡前饮一小杯（约20-30毫升），不宜过量。</li>
+        </ul>
+        <p><strong>蒸晒三次的目的：</strong>去除生药的燥性和杂质，增强有效成分的溶出率。蜂蜜既能调味，本身也有补中益气的作用。密封一个月是让药物成分充分溶入酒中。</p>
+        <p><strong>保肾丸（金匮肾气丸）：</strong>张仲景所提炼，经清乾隆皇帝改良后，成为中医十大名药之一。中医重视肾脏系统，举凡精力减退、体力衰弱、性能力弱等皆称为「肾虚」。长期服用保肾丸可加强肾功能、增进持续力。据说许多人只能吹熄一公尺半远的蜡烛，长期服用保肾丸后，便能一口气吹熄三公尺外的蜡烛。</p>
+        <p><strong>淫羊藿的优势：</strong>温和持久，从改善体质的底层逻辑入手，长期服用能感受到精力的持续改善。它不会像西地那非那样立竿见影然后迅速消退。</p>
+        <p><strong>注意事项：</strong></p>
+        <ul>
+          <li>阴虚火旺者（口干舌燥、五心烦热、盗汗遗精）慎用淫羊藿。</li>
+          <li>有高血压、心脏病的人先咨询医生。</li>
+          <li>淫羊藿性温助火，本身就是火旺体质的人吃了等于火上浇油。</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /health-sexhealth -->
+</div><!-- /page-health -->
+
+<!-- ====== PAGE 5: 文献典籍 ====== -->
+<div id="page-references" class="page">
+<h2>文献典籍</h2>
+<p class="section-desc">房中术三千年的人物与古文。选一个入口，开始探索。</p>
+
+<div class="health-tabs" role="tablist">
+  <button role="tab" aria-selected="true" class="health-tab active" onclick="switchReferencesTab('figures',this)" aria-current="page">人物志</button>
+  <button role="tab" aria-selected="false" class="health-tab" onclick="switchReferencesTab('texts',this)">古文引文</button>
+</div>
+
+<!-- TAB 1: 人物志 -->
+<div id="ref-figures" class="health-section active">
+<p class="section-desc">房中术三千年，按年代排成一条线。画像取自古籍木刻与书影，无传世画像者用文字铭牌。</p>
+<div class="lit-timeline" id="figures-grid"></div>
+</div>
+
+<!-- TAB 2: 古文引文 -->
+<div id="ref-texts" class="health-section">
+<p class="section-desc">全书古文引文，按出处检索。左侧为原文，右侧为白话解读。</p>
+<div class="filter-bar" id="text-source-filter" role="tablist" aria-label="按出处筛选"></div>
+<div id="texts-container"></div>
+</div>
+
+<details class="credits">
+  <summary>素材出处与许可</summary>
+  <div class="credits-body">
+    <p class="credits-note">本页画像与书影均为公有领域或 CC BY 4.0 素材，经灰度、二值化与透明通道处理，以内联蒙版嵌入，仅用于知识展示。CC BY 4.0 素材保留原署名与许可；Public domain 素材不受版权限制。</p>
+    <ul class="credits-list">
+      <li><b>黄帝木刻像</b> · Wellcome Collection（L0039314）· CC BY 4.0 · <a href="https://iiif.wellcomecollection.org/image/L0039314/info.json" target="_blank" rel="noopener">来源</a></li>
+      <li><b>葛洪木刻像</b> · Wellcome Collection（L0039323）· CC BY 4.0 · <a href="https://iiif.wellcomecollection.org/image/L0039323/info.json" target="_blank" rel="noopener">来源</a></li>
+      <li><b>孙思邈木刻像</b> · Wellcome Collection（L0039324）· CC BY 4.0 · <a href="https://iiif.wellcomecollection.org/image/L0039324/info.json" target="_blank" rel="noopener">来源</a></li>
+      <li><b>彭祖像</b> · 《仙佛奇踪》卷一 · Wikimedia Commons · Public domain · <a href="https://commons.wikimedia.org/wiki/File:%E4%BB%99%E4%BD%9B%E5%A5%87%E8%B9%A4_%E5%8D%B7%E4%B8%80_%E5%BD%AD%E7%A5%96.png" target="_blank" rel="noopener">来源</a></li>
+      <li><b>赵飞燕像</b> · 《漢趙飛燕》· Wikimedia Commons · Public domain · <a href="https://commons.wikimedia.org/wiki/File:%E6%BC%A2%E8%B6%99%E9%A3%9B%E7%87%95.png" target="_blank" rel="noopener">来源</a></li>
+      <li><b>《素女经》书影</b> · Wikimedia Commons（Virgin Girl Classic）· Public domain · <a href="https://commons.wikimedia.org/wiki/File:Virgin_Girl_Classic.jpg" target="_blank" rel="noopener">来源</a></li>
+      <li><b>《大乐赋》书影</b> · Wikimedia Commons（Dalefu）· Public domain · <a href="https://commons.wikimedia.org/wiki/File:Dalefu.jpg" target="_blank" rel="noopener">来源</a></li>
+      <li><b>《植物名实图考》药材图（14 味）</b> · 吴其濬 · 1848 · Public domain</li>
+    </ul>
+  </div>
+</details>
+
+</div><!-- /page-references -->
+
+<!-- ====== PAGE 6: 药石辅义 ====== -->
+<div id="page-herb" class="page">
+<h2>药石辅义</h2>
+<p class="section-desc">从古方到现代药——一张表看明白什么方管什么事，什么药治什么症。</p>
+
+<div class="disclaimer-banner">本页内容为知识科普，不构成医疗建议。所涉方剂及药物请在专业医师指导下使用。</div>
+
+<div class="herb-tabs" role="tablist">
+  <button role="tab" aria-selected="true" class="herb-tab active" onclick="switchHerbTab('formula',this)" aria-current="page">经典方剂</button>
+  <button role="tab" aria-selected="false" class="herb-tab" onclick="switchHerbTab('herb',this)">单味药解</button>
+  <button role="tab" aria-selected="false" class="herb-tab" onclick="switchHerbTab('modern',this)">现代药物</button>
+</div>
+
+<!-- ===== TAB 1: 经典方剂 ===== -->
+<div id="herb-formula" class="herb-section active">
+
+<div class="herb-master" data-herb-tab="formula">
+  <aside class="herb-index" id="herb-index-formula" aria-label="经典方剂索引"></aside>
+  <section class="herb-detail" id="herb-detail-formula" aria-live="polite"></section>
+</div>
+
+<div class="herb-filter" id="formula-filter" role="tablist" aria-label="按功能筛选">
+  <button class="filter-chip active" role="tab" aria-selected="true" onclick="filterFormula('all',this)">全部</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterFormula('yang',this)">补肾壮阳</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterFormula('sejing',this)">固精涩精</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterFormula('pingbu',this)">平补五脏</button>
+  <button class="filter-chip" role="tab" aria-selected="false" onclick="filterFormula('yin',this)">滋阴</button>
+
+
+</div>
+
+<div class="filterable-group herb-season-group" data-tags="pingbu">
+
+<div class="signal-card mb-4" onclick="this.classList.toggle('open')">
+  <div class="signal-header">
+    <span class="signal-num signal-num-accent4">季</span>
+    <div class="signal-info">
+      <div class="s-title">素女方·四季补益七首</div>
+      <div class="s-hint">《外台秘要》卷十七引《素女经》，以茯苓为主药，按四季分方。点击展开完整对比。</div>
+    </div>
+  </div>
+  <div class="signal-table-wrap">
+    <div class="signal-table-inner">
+      <table class="signal-table">
+        <thead><tr><th>季节</th><th>方名</th><th>君药</th><th>核心配伍</th><th>功效要点</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sig-icon sig-icon-accent4">春</span></td><td>更生丸</td><td>茯苓</td><td>地黄、山萸、菟丝子、苁蓉、杜仲、巴戟天、天雄等二十味</td><td>五劳七伤，阴衰消小，令人肥白填精</td></tr>
+          <tr><td><span class="sig-icon sig-icon-accent">夏</span></td><td>补肾茯苓丸</td><td>茯苓</td><td>附子、山茱萸、杜仲、桂心、细辛、苁蓉、黄芪等十二味</td><td>男子内虚不能食饮，疼冷喜忘，腰背痛</td></tr>
+          <tr><td><span class="sig-icon sig-icon-accent2">秋</span></td><td>补肾茯苓丸</td><td>茯苓</td><td>防风、桂心、白术、细辛、干地黄等二十二味</td><td>肾虚冷，梦遗精泄，阴下湿痒，五脏内伤</td></tr>
+          <tr><td><span class="sig-icon sig-icon-accent3">冬</span></td><td>垂命茯苓丸</td><td>茯苓</td><td>牡蛎、牡荆子、附子、干姜、茱萸等二十味</td><td>阴痿不起，临事不化，诸虚不足</td></tr>
+          <tr><td><span class="sig-icon sig-icon-era">四</span></td><td>茯苓散（四季通服）</td><td>茯苓</td><td>钟乳、云母粉、石斛、菖蒲、柏子仁等二十二味</td><td>不避寒暑，久服长生延年，老而更壮</td></tr>
+        </tbody>
+      </table>
+      <div class="signal-note"><div class="signal-note-label">四季用药逻辑</div><div class="signal-note-text">春生夏长秋收冬藏——春方更生丸侧重"生发"，夏方补肾茯苓丸侧重"长养"，秋方补肾茯苓丸侧重"收敛"，冬方垂命茯苓丸侧重"封藏"，四季通服茯苓散贯穿全年调和。五味均以茯苓为君，通利水道兼补脾宁心，四季加减变化围绕季节特点展开。</div></div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<div class="card-grid cols3">
+
+<div class="card" data-tags="pingbu" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">养生方</div>
+  <div class="card-title">麦卵方</div>
+  <div class="card-body">每日清晨以鸡蛋入酒饮服，连服二十一日，强益颜色。马王堆《养生方》首方，取"卵生精"之意。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>鲜鸡蛋一枚、清酒适量</p>
+    <h4>用法</h4><p>清晨取鲜鸡蛋去壳，搅入温酒中饮服。每日一次，连用二十一日。</p>
+    <h4>功效</h4><p>强益颜色，令人肥白，充肌润肤。</p>
+    <h4>现代理解</h4><p>鸡蛋含优质蛋白、卵磷脂、锌，酒能促进血液循环。空腹酒后微微发热，全身血流加速，面色改善。可视为蛋白补剂的雏形。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="pingbu" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">杂疗方</div>
+  <div class="card-title">内加方</div>
+  <div class="card-body">马王堆《杂疗方》所载外用补益方，以桂枝、干姜、花椒、皂荚等辛温药研末蜜丸，塞脐外用。非内服方。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>桂枝、干姜、花椒、皂荚等辛温芳香药，粉碎后以米汤和丸</p>
+    <h4>用法</h4><p>塞于脐部，外用。此为外治法。</p>
+    <h4>功效</h4><p>男子补益，温通阳气</p>
+    <h4>出处</h4><p>马王堆汉墓帛书《杂疗方》。释文见复旦大学出版社《马王堆汉墓帛书〔肆〕》。</p>
+    <h4>说明</h4><p>马王堆帛书中的"内加方"为外用方，非内服。后世房中补益方中常见的肉苁蓉、菟丝子、蛇床子等配伍并非此方原貌。已按原始释文修正。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">洞玄子</div>
+  <div class="card-title">秃鸡散</div>
+  <div class="card-body">房中术第一起痿名方。蜀郡吕敬大七十岁服药得生三男，鸡啄其冠至秃——故名。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>肉苁蓉三分、五味子三分、菟丝子三分、远志三分、蛇床子四分</p>
+    <h4>炮制</h4><p>上五味捣筛为散</p>
+    <h4>用法</h4><p>每日空腹酒下方寸匕（约2-3克），日三次。亦可白蜜和丸如梧桐子大。</p>
+    <h4>功效</h4><p>男子五劳七伤，阴痿不起，为事不能。</p>
+    <h4>加味（千金版）</h4><p>加防风、巴戟天、杜仲，共八味各二两。</p>
+    <h4>轶事</h4><p>蜀郡太守吕敬大，年七十服药得生三男。药名由来：服药后连日不下，家中公鸡啄其头冠至秃，故名"秃鸡散"。</p>
+    <h4>组方分析</h4><p>苁蓉、菟丝子填精，蛇床子温肾助阳，远志安神定志交通心肾，五味子固涩敛精。五味结合，温而不燥，补而不滞。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang,sejing" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">洞玄子</div>
+  <div class="card-title">鹿角散</div>
+  <div class="card-body">治阴痿不起、临事不成的重剂，含鹿角血肉有情之品，兼固精关。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>鹿角、柏子仁、菟丝子、蛇床子、车前子、远志、五味子、肉苁蓉（各四分）</p>
+    <h4>用法</h4><p>捣筛为散，每食后服五分匕（约1.5-2克），日三次。不效，更加方寸匕。</p>
+    <h4>功效</h4><p>男子五劳七伤，阴痿不起，卒就妇人临事不成，中道痿死，精自引出，小便余沥，腰背疼冷。</p>
+    <h4>组方亮点</h4><p>鹿角为血肉有情之品，补肾阳、益精血力量远强于草木药。柏子仁养心安神，车前子利水泻浊使补而不滞。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">千金方</div>
+  <div class="card-title">苁蓉钟乳七味方</div>
+  <div class="card-body">含钟乳石等矿物药，治"痿而不起，起而不大，大而不长，长而不热，热而不坚，坚而不久"六症俱全者。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>肉苁蓉三两、钟乳三两、蛇床子三两、远志三两、续断三两、薯蓣三两、鹿茸三两</p>
+    <h4>用法</h4><p>酒服方寸匕，日二次。</p>
+    <h4>加减法</h4><p>欲多房倍蛇床，欲坚倍远志，欲大倍鹿茸，欲多精倍钟乳。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">玉房秘诀</div>
+  <div class="card-title">五物方</div>
+  <div class="card-body">治男子阴痿不起、起而不强、临事如无情。苁蓉+五味子+蛇床+菟丝+枳实，酒服。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>肉苁蓉二分、五味子二分、蛇床子四分、菟丝子四分、枳实四分</p>
+    <h4>用法</h4><p>捣筛酒服方寸匕，日三次。</p>
+    <h4>功效</h4><p>男子阴痿不起，起而不强，就事如无情。</p>
+    <h4>出处</h4><p>《医心方》卷二十八引《玉房秘诀》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">玉房指要</div>
+  <div class="card-title">四物方</div>
+  <div class="card-body">四味等分，日服方寸匕，令人一夜十余不息。托名曹操服之。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>蛇床子、远志、续断、肉苁蓉（各等分）</p>
+    <h4>用法</h4><p>为散，日三服方寸匕。</p>
+    <h4>功效</h4><p>男子欲令健，房室一夜十余不息。</p>
+    <h4>出处</h4><p>《医心方》卷二十八引《玉房指要》。附注：曹公（曹操）服之一夜行七十女（托名附会，不可当真）。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="pingbu" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">范汪方</div>
+  <div class="card-title">开心薯蓣肾气丸</div>
+  <div class="card-body">服药五日玉茎炽满，三十夜热气朗彻。苁蓉+山萸+地黄+远志+蛇床子+五味子等。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>肉苁蓉一两、山茱萸一两、干地黄六分、远志六分、蛇床子五分、五味子六分、防风六分、茯苓六分、牛膝六分、菟丝子六分、杜仲六分、薯蓣六分</p>
+    <h4>用法</h4><p>蜜丸如梧子，服二十丸，日二夜一。</p>
+    <h4>功效</h4><p>五劳七伤，髓极不耐寒，腰胀心满雷鸣。</p>
+    <h4>药效描述</h4><p>服药五日，玉茎炽满；三十夜热气朗彻，面色如花。</p>
+    <h4>出处</h4><p>《医心方》卷二十八引《范汪方》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang,sejing" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">医心方</div>
+  <div class="card-title">苁蓉丸</div>
+  <div class="card-body">七味蜜丸，治积有十年的阳痿痒湿、小便淋沥。缓补而持久。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>肉苁蓉、菟丝子、蛇床子、五味子、远志、续断、杜仲（各四分）</p>
+    <h4>用法</h4><p>蜜丸如梧子，平旦服五丸，日再。</p>
+    <h4>功效</h4><p>五劳七伤，阴阳痿不起，积有十年痒湿、小便淋沥。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">千金方</div>
+  <div class="card-title">三子丹</div>
+  <div class="card-body">就三味药：菟丝子、蛇床子、五味子。秃鸡散去掉苁蓉和远志就是它——孙思邈的方子，李时珍说"治阳不起的要药"。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>菟丝子、蛇床子、五味子（各等分）</p>
+    <h4>炮制</h4><p>三味捣筛为散，或炼蜜为丸</p>
+    <h4>用法</h4><p>酒服方寸匕，日三次。</p>
+    <h4>功效</h4><p>起阳，治男子阳痿不起。</p>
+    <h4>出处</h4><p>唐·孙思邈《千金方》。明朝张景岳亦将其作为治阳不起要药。</p>
+    <h4>与原方关系</h4><p>秃鸡散减肉苁蓉、远志即为三子丹——更精简，药力更专一。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang,sejing" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">金匮要略</div>
+  <div class="card-title">金匮肾气丸</div>
+  <div class="card-body">补肾祖方。张仲景所创，阴中求阳之典范：六味地黄三补三泻+桂枝附子少量温阳。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>干地黄八两、山药四两、山茱萸四两、泽泻三两、茯苓三两、牡丹皮三两、桂枝一两、制附子一两</p>
+    <h4>炮制</h4><p>蜜丸如梧子大</p>
+    <h4>用法</h4><p>酒下十五丸，日再服。</p>
+    <h4>功效</h4><p>温补肾阳，化气行水。主治肾阳不足——腰痛脚软、下半身常有冷感、少腹拘急、小便不利或反多、阳痿早泄。</p>
+    <h4>对应证型</h4><p>肾阳虚（命门火衰，气化不利）</p>
+    <h4>组方逻辑</h4><p>六味地黄丸（三补三泻）+桂枝、附子少量温阳。补中有泻，阴中求阳——少量桂枝、附子在大量滋阴药中"引火归元"，不以峻补而以化气为要。</p>
+    <h4>现代药理</h4><p>临床研究显示可调节下丘脑-垂体-性腺轴功能，改善性激素水平。对糖尿病肾病、慢性肾炎也有一定疗效。</p>
+    <h4>出处</h4><p>东汉·张仲景《金匮要略》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">景岳全书</div>
+  <div class="card-title">右归丸</div>
+  <div class="card-body">金匮肾气丸去三泻（泽泻苓丹），加鹿角胶、菟丝、杜仲、归、杞。纯补无泻，温肾填精。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>熟地黄八两、炒山药四两、微炒山茱萸三两、微炒枸杞四两、炒珠鹿角胶四两、制菟丝子四两、姜汤炒杜仲四两、当归三两、肉桂二至四两、制附子二至六两</p>
+    <h4>用法</h4><p>蜜丸，每服9克，日三次。</p>
+    <h4>功效</h4><p>温补肾阳，填精益髓。主治肾阳不足、命门火衰——神疲气怯、畏寒肢冷、阳痿遗精、不能生育。</p>
+    <h4>对应证型</h4><p>肾阳虚重证（命门火衰）</p>
+    <h4>组方特点</h4><p>金匮肾气丸去"三泻"（泽泻、茯苓、丹皮）+鹿角胶、菟丝子、杜仲、当归、枸杞，纯补无泻，温补力强。</p>
+    <h4>出处</h4><p>明·张景岳《景岳全书》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yin" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">景岳全书</div>
+  <div class="card-title">左归丸</div>
+  <div class="card-body">纯补无泻，壮水之主。六味地黄去三泻，加龟鹿二胶、枸杞、菟丝、牛膝。治真阴不足。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>大怀熟地八两、炒山药四两、枸杞四两、山茱萸肉四两、川牛膝三两、制菟丝子四两、鹿角胶（炒珠）四两、龟板胶（炒珠）四两</p>
+    <h4>用法</h4><p>蜜丸如梧子大，食前滚汤或淡盐汤送下百余丸（9克）。</p>
+    <h4>功效</h4><p>滋阴补肾，填精益髓。主治真阴不足——头晕目眩、腰酸腿软、遗精滑泄、自汗盗汗、口燥舌干。</p>
+    <h4>对应证型</h4><p>肾阴虚（真阴不足，精髓内亏）</p>
+    <h4>组方特点</h4><p>六味地黄丸去"三泻"+龟鹿二胶、枸杞、菟丝子、牛膝。景岳"阳中求阴"配伍思路——纯补无泻，壮水之主以制阳光。</p>
+    <h4>出处</h4><p>明·张景岳《景岳全书》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yin" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">小儿药证直诀</div>
+  <div class="card-title">六味地黄丸</div>
+  <div class="card-body">滋阴补肾第一方。钱乙从金匮肾气丸去桂附化裁而来，"三补三泻"结构统治肝肾阴虚诸证。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>熟地黄24g、山茱萸12g、山药12g、泽泻9g、牡丹皮9g、茯苓9g</p>
+    <h4>炮制</h4><p>炼蜜为丸</p>
+    <h4>用法</h4><p>每服9克，日二至三次，淡盐汤送下。</p>
+    <h4>功效</h4><p>滋补肝肾。主治肝肾阴虚——腰膝酸软、头晕目眩、耳鸣耳聋、盗汗遗精、骨蒸潮热、手足心热、口燥咽干、舌红少苔。</p>
+    <h4>对应证型</h4><p>肝肾阴虚证</p>
+    <h4>组方逻辑</h4><p>"三补三泻"——熟地补肾、山萸补肝、山药补脾为三补；泽泻泻肾浊、丹皮清肝火、茯苓渗脾湿为三泻。补中有泻，以补为主，补而不滞。此方结构被后世称为"补肾祖方"。</p>
+    <h4>与性功能的关系</h4><p>肾阴虚则相火内扰精室，精关被扰则遗精早泄。六味地黄丸通过滋阴填精补足肾阴，阴足则火自降——不是直接清火，而是补水的办法让火自然收敛。</p>
+    <h4>出处</h4><p>宋·钱乙《小儿药证直诀》。原方脱胎于张仲景金匮肾气丸去桂枝、附子。</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yin" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">医宗金鉴</div>
+  <div class="card-title">知柏地黄丸</div>
+  <div class="card-body">六味地黄丸加知母、黄柏，滋阴降火力更强。治阴虚火旺——骨蒸潮热、盗汗遗精、相火亢盛。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>熟地黄24g、山茱萸12g、山药12g、泽泻9g、牡丹皮9g、茯苓9g、知母9g、黄柏9g</p>
+    <h4>功效</h4><p>滋阴降火。比六味地黄丸多了清相火的知母、黄柏，兼清下焦湿热。</p>
+    <h4>主治</h4><p>阴虚火旺重证——骨蒸潮热、虚烦盗汗、腰脊酸痛、遗精、小便短赤、舌红少苔、尺脉数而有力。</p>
+    <h4>对应证型</h4><p>阴虚火旺（肾阴虚+相火亢盛）</p>
+    <h4>与六味地黄丸的区别</h4><p>六味偏于补，知柏偏于清。六味治"阴不足"，知柏治"阴不足+火太旺"。如果只是腰膝酸软、口干，六味就够了。如果有明显的潮热、盗汗、心烦、遗精频繁，知柏更对症。</p>
+    <h4>注意</h4><p>知母、黄柏性寒，脾胃虚寒（容易拉肚子、胃凉）者不宜久服。</p>
+    <h4>出处</h4><p>清·《医宗金鉴》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yin" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">丹溪心法</div>
+  <div class="card-title">大补阴丸</div>
+  <div class="card-body">朱丹溪"培本清源"名方。熟地+龟板+知母+黄柏，滋阴与降火并重。治骨蒸盗汗、遗精频作。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>熟地黄180g、龟板180g、黄柏120g、知母120g，猪脊髓、炼蜜为丸</p>
+    <h4>现代常用量</h4><p>熟地18g、龟板18g、黄柏12g、知母12g，水煎服。</p>
+    <h4>功效</h4><p>滋阴降火。朱丹溪认为"阴常不足，阳常有余"，此方专为阴虚火旺而设。</p>
+    <h4>主治</h4><p>阴虚火旺证——骨蒸潮热、盗汗遗精、咳嗽咯血、心烦易怒、足膝疼热、舌红少苔、尺脉数而有力。</p>
+    <h4>对应证型</h4><p>肝肾阴虚、相火亢盛</p>
+    <h4>配伍特点</h4><p>滋阴（熟地、龟板）与降火（知母、黄柏）并重，培本清源。猪脊髓填精补髓，为血肉有情之品。吴谦称"是方能骤补真阴，承制相火，较之六味尤捷"。</p>
+    <h4>与知柏地黄丸的区别</h4><p>知柏地黄丸是在六味基础上加味，补中带清；大补阴丸是滋阴+降火各占一半，降火力度更大。大补阴丸含龟板胶、猪脊髓，填精之力也更强。</p>
+    <h4>出处</h4><p>元·朱丹溪《丹溪心法》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="pingbu" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">摄生众妙方</div>
+  <div class="card-title">五子衍宗丸</div>
+  <div class="card-body">五种植物质地种子药，取"以子补子"之意。平补阴阳，补中有泻。治久不生育、精少。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>枸杞子八两、菟丝子八两、五味子二两、覆盆子四两、车前子二两</p>
+    <h4>用法</h4><p>炼蜜为丸如梧子大，每服9克，日二次。</p>
+    <h4>功效</h4><p>补肾益精。主治肾精不足——久不生育、腰膝酸软、须发早白、阳痿早泄、遗精。</p>
+    <h4>对应证型</h4><p>肾精亏（重在填精，阴阳平补）</p>
+    <h4>组方特点</h4><p>五种植物质地种子类药物，"以子补子"，平补阴阳。枸杞、菟丝子平补阴阳，五味子、覆盆子固涩敛精，车前子利水泻浊使补而不滞。以"子"入药并非玄学——种子类药材含大量不饱和脂肪酸、维生素E和微量元素，对生殖功能确有物质基础。</p>
+    <h4>出处</h4><p>明·《摄生众妙方》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="pingbu" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">医方考</div>
+  <div class="card-title">龟鹿二仙胶</div>
+  <div class="card-body">四味血肉有情之品（鹿角+龟板+枸杞+人参），阴阳气血并补。蒸炼成胶，空腹酒化下。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>鹿角十斤、龟板五斤、枸杞子三十两、人参十五两</p>
+    <h4>炮制</h4><p>熬炼成胶</p>
+    <h4>用法</h4><p>每服一钱至三钱（3-10克），空腹酒化下。</p>
+    <h4>功效</h4><p>滋阴填精，益气壮阳。主治真元虚损、精血不足——瘦弱少气、梦遗泄精、目视不明、腰膝酸软。</p>
+    <h4>对应证型</h4><p>肾精亏兼气血两虚</p>
+    <h4>组方特点</h4><p>鹿角通督脉补阳，龟板通任脉补阴，人参大补元气，枸杞填精。鹿角龟板熬胶，胶质入肾最速。熬胶之法让血肉有情之品的有效成分充分溶出，吸收优于散剂丸剂。</p>
+    <h4>出处</h4><p>明·《医便》卷一（亦载于《医方考》）</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="yang" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">景岳全书</div>
+  <div class="card-title">赞育丹</div>
+  <div class="card-body">壮阳力度为补肾诸方之首。含仙茅、淫羊藿、巴戟天、韭菜子、蛇床子、附子、肉桂等大队辛热药。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>熟地黄八两、白术八两、当归六两、枸杞子六两、杜仲四两、仙茅四两、巴戟天四两、山茱萸四两、淫羊藿四两、肉苁蓉四两、韭菜子四两、蛇床子二两、制附子二两、肉桂二两</p>
+    <h4>用法</h4><p>蜜丸，每服6-9克，日1-2次。</p>
+    <h4>功效</h4><p>补肾壮阳。主治阳痿精衰、阴寒不育——舌淡苔白、脉沉迟。</p>
+    <h4>对应证型</h4><p>肾阳虚重症（下元虚寒，命火衰微）</p>
+    <h4>组方特点</h4><p>大队辛热温肾壮阳之品（仙茅、淫羊藿、巴戟天、韭菜子、蛇床子、附子、肉桂）+熟地、归、杞、萸肉等填精补血。壮阳力度为补肾诸方之首。</p>
+    <h4>注意</h4><p>阳盛阴虚者忌用。此方大热，阴虚火旺体质（口干、五心烦热、盗汗、舌红少苔）服之如抱薪救火。</p>
+    <h4>出处</h4><p>明·张景岳《景岳全书》</p>
+  </div></div>
+</div>
+
+<div class="card" data-tags="sejing" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-source">医方集解</div>
+  <div class="card-title">金锁固精丸</div>
+  <div class="card-body">补肾涩精的代表方。沙苑蒺藜、芡实、莲须、龙骨、牡蛎——专治遗精滑泄、精关不固。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>组成</h4><p>沙苑蒺藜（炒）60g、芡实（蒸）60g、莲须60g、龙骨（酥炙）30g、牡蛎（煅）30g，莲子粉糊丸。</p>
+    <h4>用法</h4><p>每服9克，日2-3次，淡盐汤送下。</p>
+    <h4>功效</h4><p>补肾涩精。标本兼顾——沙苑蒺藜补肾固精为君，芡实、莲须固涩止遗为臣，龙骨、牡蛎潜镇安神为佐使。</p>
+    <h4>主治</h4><p>肾虚不固之遗精滑泄、神疲乏力、腰痛耳鸣、舌淡苔白、脉细弱。</p>
+    <h4>对应证型</h4><p>肾虚精关不固</p>
+    <h4>使用注意</h4><p>下焦湿热或相火偏旺所致遗精者禁用（舌苔黄腻、小便黄赤、阴茎易举——这些是湿热/火旺的标志，涩精会闭门留寇）。</p>
+    <h4>出处</h4><p>清·汪昂《医方集解》</p>
+  </div></div>
+</div>
+
+</div>
+
+</div>
+
+<!-- /herb-formula -->
+
+<!-- ===== TAB 2: 单味药解 ===== -->
+<div id="herb-herb" class="herb-section">
+<p class="section-desc">一味中药一卡片。古人怎么说 + 现代药理怎么解释 + 安全须知。</p>
+
+<div class="herb-master" data-herb-tab="herb">
+  <aside class="herb-index" id="herb-index-herb" aria-label="单味药索引"></aside>
+  <section class="herb-detail" id="herb-detail-herb" aria-live="polite"></section>
+</div>
+
+<div class="card-grid cols3">
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">淫羊藿</div>
+  <div class="card-subtitle">Epimedium · 仙灵脾</div>
+  <div class="card-body">房中术"媚药之王"——性温味辛甘，归肝肾经。现代药理关键成分淫羊藿苷（icariin）促进NO释放、扩张血管、改善海绵体充血。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味辛甘，归肝、肾经</p>
+    <h4>传统功效</h4><p>补肾壮阳，祛风除湿</p>
+    <h4>现代药理</h4><p>淫羊藿苷（icariin）能抑制PDE5活性（机制类似西地那非但温和得多），促进NO释放→cGMP升高→海绵体平滑肌松弛→血管扩张充血。同时对下丘脑-垂体-性腺轴有调节作用，可提升血清睾酮水平。还有抗骨质疏松、抗疲劳、抗抑郁等作用。</p>
+    <h4>证据级别</h4><p>动物实验证据充分（小鼠/大鼠交配行为增强），人体临床有限但有一致信号。对比西地那非，效果温和但持久，适合长期调理。</p>
+    <h4>禁忌</h4><p>阴虚火旺者（口干舌燥、五心烦热、盗汗、舌红少苔）慎用。高血压、心脏病患者先咨询医师。性温助火，火旺体质者慎服。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">肉苁蓉</div>
+  <div class="card-subtitle">Cistanche · 大芸</div>
+  <div class="card-body">补肾阳益精血之润药，温而不燥、补而不峻。含苯乙醇苷类成分，有抗氧化、抗疲劳、促性激素作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味甘咸，归肾、大肠经</p>
+    <h4>传统功效</h4><p>补肾阳，益精血，润肠通便</p>
+    <h4>现代药理</h4><p>主要活性成分为苯乙醇苷类（松果菊苷、毛蕊花糖苷），能提升血清睾酮水平、促进精子活力、抗氧化延缓衰老。动物实验显示可对抗应激性性功能低下。</p>
+    <h4>临床证据</h4><p>动物实验++，人体临床多为复方应用。单味药证据较弱，但古人几百年的使用经验说明其安全性和基础效用。</p>
+    <h4>禁忌</h4><p>相火旺盛（性欲亢进）、脾虚便溏者慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">平补</div>
+  <div class="card-title">菟丝子</div>
+  <div class="card-subtitle">Cuscuta · 无根藤子</div>
+  <div class="card-body">平补阴阳的种子药。含黄酮类成分，对下丘脑-垂体-性腺轴有双向调节作用。常用于精子质量低下、性欲减退。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性平，味辛甘，归肝、肾、脾经</p>
+    <h4>传统功效</h4><p>补益肝肾，固精缩尿，安胎，明目，止泻</p>
+    <h4>现代药理</h4><p>菟丝子黄酮能调节HPG轴，促进GnRH分泌，提升FSH、LH和睾酮水平。动物实验显示可改善精子密度和活动率。另有抗氧化、抗凋亡、保护睾丸间质细胞的作用。</p>
+    <h4>证据级别</h4><p>动物实验充分，生殖领域有较高质量中药临床研究。</p>
+    <h4>禁忌</h4><p>阴虚火旺、大便燥结者慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">滋阴</div>
+  <div class="card-title">枸杞子</div>
+  <div class="card-subtitle">Lycium barbarum · 枸杞</div>
+  <div class="card-body">最日常的补肾药——甘平质润，含枸杞多糖（LBP），有调节免疫、抗氧化、保护生殖系统的多重作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性平，味甘，归肝、肾经</p>
+    <h4>传统功效</h4><p>滋补肝肾，益精明目</p>
+    <h4>现代药理</h4><p>枸杞多糖（LBP）有显著抗氧化作用，保护睾丸组织免受氧化损伤；动物实验显示可提升血清睾酮水平、改善精子质量。对应"补肾"的现代解释——不是直接催淫，而是保护生殖系统的物质基础。</p>
+    <h4>证据级别</h4><p>动物实验++，人群研究多为膳食与精液质量关联性研究，缺乏单味药RCT。</p>
+    <h4>安全性</h4><p>药食同源，安全性高。脾胃虚弱者不宜多食。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">巴戟天</div>
+  <div class="card-subtitle">Morinda officinalis</div>
+  <div class="card-body">补肾阳、强筋骨。含蒽醌类、环烯醚萜类成分，有抗疲劳、促性激素样作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性微温，味辛甘，归肾、肝经</p>
+    <h4>传统功效</h4><p>补肾阳，强筋骨，祛风湿</p>
+    <h4>现代药理</h4><p>巴戟天水提物能提升大鼠睾酮水平和精子计数。蒽醌类成分有抗抑郁和抗骨质疏松作用。在中医方剂中常与肉苁蓉、菟丝子配伍。</p>
+    <h4>禁忌</h4><p>阴虚火旺或有湿热者忌服。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">鹿茸</div>
+  <div class="card-subtitle">Cervus elaphus</div>
+  <div class="card-body">血肉有情之品，峻补肾阳。含鹿茸多肽、生长因子。需从小量开始（1-2克/日），过量反致鼻衄。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味甘咸，归肾、肝经</p>
+    <h4>传统功效</h4><p>壮肾阳，益精血，强筋骨，调冲任</p>
+    <h4>现代药理</h4><p>鹿茸含多种生长因子（IGF-1、EGF等）、氨基酸、磷脂、硫酸软骨素等活性物质。能促进蛋白质合成、改善能量代谢、调节免疫。对性功能的作用体现为提升整体机能状态而非直接催淫。</p>
+    <h4>证据级别</h4><p>以动物实验和中药复方临床为主。</p>
+    <h4>用法</h4><p>研末冲服每次1-2克，或入丸剂。宜从小量开始，逐渐加量。</p>
+    <h4>禁忌</h4><p>阴虚阳亢、血热、外感热病者忌服。高血压患者慎用。小儿不宜。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">杜仲</div>
+  <div class="card-subtitle">Eucommia ulmoides</div>
+  <div class="card-body">强腰膝、壮筋骨的传统要药。含木脂素类成分，有降压、抗炎、促进成骨细胞分化的作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味甘，归肝、肾经</p>
+    <h4>传统功效</h4><p>补肝肾，强筋骨，安胎</p>
+    <h4>现代药理</h4><p>杜仲含松脂醇二葡萄糖苷（降压成分）、绿原酸（抗氧化）、黄酮类。动物实验显示可提升睾酮水平和精子活力。在补肾壮阳方中被用作强腰膝的辅助药，直接改善"腰膝酸软"这个最常见伴随症状。</p>
+    <h4>禁忌</h4><p>阴虚火旺慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">蛇床子</div>
+  <div class="card-subtitle">Cnidium monnieri</div>
+  <div class="card-body">房中术方剂中的高频药——归肾经、性温味辛苦。含蛇床子素（osthole），有雌激素样和雄激素样双重调节作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味辛苦，归肾经</p>
+    <h4>传统功效</h4><p>温肾壮阳，燥湿杀虫</p>
+    <h4>现代药理</h4><p>蛇床子素（osthole）通过激活cAMP/PKA和NO/cGMP双通路促进海绵体舒张。此外兼具雌激素样和雄激素样双重调节作用。外用有抗炎、抗真菌效果——对应古人的"燥湿杀虫"（阴道炎等）。</p>
+    <h4>注意</h4><p>秃鸡散、鹿角散、苁蓉丸等主要房中术方剂几乎都含蛇床子。它是古人最确信有效的"性药"之一。</p>
+    <h4>禁忌</h4><p>阴虚火旺者慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">锁阳</div>
+  <div class="card-subtitle">Cynomorium songaricum</div>
+  <div class="card-body">功能与肉苁蓉相近而温燥之力更强。含黄酮、鞣质，有抗氧化、抗疲劳、促性激素作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味甘，归肝、肾、大肠经</p>
+    <h4>传统功效</h4><p>补肾壮阳，润肠通便</p>
+    <h4>现代药理</h4><p>锁阳醇提物能提升大鼠性行为表现和血清睾酮。含大量鞣质（收涩作用）+黄酮（抗氧化）+三萜类。常与肉苁蓉配伍。</p>
+    <h4>禁忌</h4><p>阴虚火旺、脾虚泄泻者慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">仙茅</div>
+  <div class="card-subtitle">Curculigo orchioides</div>
+  <div class="card-body">补肾阳之峻药。含仙茅苷（curculigoside），有免疫调节和促性激素作用。赞育丹中与淫羊藿并用的主力。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性热，味辛，归肾、肝、脾经</p>
+    <h4>传统功效</h4><p>温肾壮阳，祛寒除湿</p>
+    <h4>现代药理</h4><p>仙茅苷具有免疫调节、抗氧化、抗炎和促性激素作用。动物实验显示可提升睾酮水平和性器官重量。</p>
+    <h4>禁忌</h4><p>阴虚火旺忌服。性热燥烈，不可久服过量。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">补阳</div>
+  <div class="card-title">韭菜子</div>
+  <div class="card-subtitle">Allium tuberosum</div>
+  <div class="card-body">日常食材亦是一味药——温补肝肾、壮阳固精。含硫化物和皂苷，有温和的性激素样作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味辛甘，归肾、肝经</p>
+    <h4>传统功效</h4><p>温补肝肾，壮阳固精</p>
+    <h4>药理</h4><p>含硫化物（如蒜氨酸）和甾体皂苷。有温和的性激素样作用。古人"以形补形"——韭菜割了又长，象征再生能力，但硫化物扩张血管、皂苷轻度调节激素的现代机制确实验证了部分效果。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">收涩</div>
+  <div class="card-title">覆盆子</div>
+  <div class="card-subtitle">Rubus chingii</div>
+  <div class="card-body">固精缩尿，益肾。含覆盆子苷、有机酸。五子衍宗丸成员之一——主要贡献在"固"不在"补"。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味甘酸，归肝、肾、膀胱经</p>
+    <h4>传统功效</h4><p>益肾固精缩尿，养肝明目</p>
+    <h4>药理</h4><p>含覆盆子苷、有机酸、维生素类成分。有弱雌激素样作用和抗氧化作用。在五子衍宗丸中起固涩作用——防止前面补进去的精漏掉。</p>
+    <h4>禁忌</h4><p>肾虚有火、小便短涩者慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">收涩</div>
+  <div class="card-title">五味子</div>
+  <div class="card-subtitle">Schisandra chinensis</div>
+  <div class="card-body">五味俱全（皮甘肉酸核辛苦都有咸味），入五脏。核心成分木脂素有抗氧化、保肝、适应原样作用。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性温，味酸甘，归肺、心、肾经</p>
+    <h4>传统功效</h4><p>收敛固涩，益气生津，补肾宁心</p>
+    <h4>现代药理</h4><p>五味子木脂素（schisandrin）是强大的抗氧化剂，能保护肝脏、提高ATP生成效率、改善细胞能量代谢。适应原样作用——帮助身体应对应激。固精方中用它，核心逻辑是"收"——把补进来的精收敛住不让流失。</p>
+    <h4>禁忌</h4><p>外有表邪、内有实热者慎用。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-attr">滋阴</div>
+  <div class="card-title">黄精</div>
+  <div class="card-subtitle">Polygonatum sibiricum</div>
+  <div class="card-body">气阴双补的平补药。含黄精多糖、甾体皂苷。用于腰膝酸软、须发早白等早衰征象。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>性味归经</h4><p>性平，味甘，归脾、肺、肾经</p>
+    <h4>传统功效</h4><p>补气养阴，健脾润肺，益肾</p>
+    <h4>现代药理</h4><p>黄精多糖有抗氧化、降血糖、调节免疫作用。甾体皂苷有弱雌激素样活性。古人用黄精"延年"的本质是抗衰老、抗疲劳、提高整体机能水平，间接改善性功能。</p>
+    <h4>禁忌</h4><p>中寒泄泻、痰湿痞满者禁服。</p>
+  </div></div>
+</div>
+
+</div></div><!-- /herb-herb -->
+
+<!-- ===== TAB 3: 现代药物 ===== -->
+<div id="herb-modern" class="herb-section">
+<p class="section-desc">现代循证医学中与性功能相关的药物一览。证据级别标注清晰，禁忌不可忽视。</p>
+
+<div class="herb-master" data-herb-tab="modern">
+  <aside class="herb-index" id="herb-index-modern" aria-label="现代药物索引"></aside>
+  <section class="herb-detail" id="herb-detail-modern" aria-live="polite"></section>
+</div>
+
+<div class="card-grid cols2">
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-type">PDE5抑制剂</div>
+  <div class="card-title">西地那非（Sildenafil）· 万艾可</div>
+  <div class="card-body">首款PDE5抑制剂（1998年上市），ED一线药物。起效30-60分钟，持续约4小时（大剂量可达12小时）。高脂餐延迟吸收。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>作用机制</h4><p>抑制PDE5→阻止cGMP降解→海绵体平滑肌松弛→血流增加。需要性刺激触发，本身不产生勃起。</p>
+    <h4>用法</h4><p>按需服用，推荐剂量25-100mg，性活动前约1小时服用。</p>
+    <h4>食物影响</h4><p>高脂餐显著延迟起效时间（约延长1小时）。</p>
+    <h4>常见副作用</h4><p>头痛（10-15%）、面部潮红、鼻塞、视觉异常（蓝视/PDE6交叉反应）。</p>
+    <h4>绝对禁忌</h4><p><strong>严禁与硝酸酯类药物同用</strong>（硝酸甘油、单硝酸异山梨酯等——致严重低血压可致命）。与α受体阻滞剂联用需谨慎。最后一次用药后需至少24小时代谢窗口方可使用硝酸酯。</p>
+    <h4>证据级别</h4><p>A级（多项RCT+上市后20+年安全性数据）。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-type">PDE5抑制剂</div>
+  <div class="card-title">他达拉非（Tadalafil）· 希爱力</div>
+  <div class="card-body">超长半衰期（~17.5小时），有效时间达36小时。不受食物影响。有每日5mg的持续疗法，兼治BPH。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>特点</h4><p>半衰期约17.5小时（是西地那非的4倍），有效时间长达36小时。起效约30分钟，不受食物影响。</p>
+    <h4>用法</h4><p>按需：10-20mg，性活动前服用。每日：5mg，每日一次（适合频率较高者）。</p>
+    <h4>额外适应症</h4><p>BPH（良性前列腺增生）、肺动脉高压。</p>
+    <h4>副作用</h4><p>肌痛/背痛发生率较高（6-9%，可能与PDE11交叉反应有关），头痛、消化不良。无西地那非的视觉异常。</p>
+    <h4>绝对禁忌</h4><p>同PDE5抑制剂——禁止与硝酸酯类同用。需48小时代谢窗口方可使用硝酸酯。与α受体阻滞剂联用需谨慎。</p>
+    <h4>证据级别</h4><p>A级</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-type">PDE5抑制剂</div>
+  <div class="card-title">伐地那非（Vardenafil）· 艾力达</div>
+  <div class="card-body">起效快（25-60分钟），持续最长10小时。高脂餐降低吸收率。注意QTc间期延长风险。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>特点</h4><p>起效时间25-60分钟，半衰期4-5小时，有效时间约10小时。高脂餐降低血药浓度峰值18-50%。</p>
+    <h4>用法</h4><p>按需5-20mg，性活动前25-60分钟服用。</p>
+    <h4>特殊警示</h4><p>可延长QTc间期，禁止与IA类或III类抗心律失常药联用。禁用于先天性长QT综合征患者。</p>
+    <h4>证据级别</h4><p>A级</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-alert">早泄</div>
+  <div class="card-title">达泊西汀（Dapoxetine）· 必利劲</div>
+  <div class="card-body">唯一获批的按需服用早泄口服药。性活动前1-3小时服，平均IELT从~1分钟延长至~3分钟。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>机制</h4><p>短效SSRI（选择性5-羟色胺再摄取抑制剂），按需服用——区别于传统SSRI（每日服用）。起效快、半衰期短。</p>
+    <h4>用法</h4><p>30mg或60mg，性活动前1-3小时服用。首次服药即有效，无需累积。</p>
+    <h4>疗效数据</h4><p>来自5项III期RCT（n=6081）：基线IELT 0.9分钟→30mg组2.78分钟（2.5倍），60mg组3.32分钟（3倍）。安慰剂组1.75分钟。</p>
+    <h4>副作用</h4><p>恶心（30mg 11.0% / 60mg 22.2%）、头晕、头痛。60mg疗效略优于30mg但副作用显著增加。</p>
+    <h4>优势</h4><p>无SSRI停药综合征。严重不良事件罕见。</p>
+    <h4>证据级别</h4><p>A级（多项大型RCT+荟萃分析+试验序贯分析已达充分结论）。</p>
+    <h4>注意事项</h4><p>处方药，需医生评估后使用。不适用于所有早泄类型（心理性早泄需心理咨询为主）。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-alert">早泄</div>
+  <div class="card-title">局部麻醉剂</div>
+  <div class="card-body">利多卡因喷雾/乳膏，性前5-20分钟涂于龟头，IELT延长效果可能优于达泊西汀。注意清洗保护伴侣感受。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>常用制剂</h4><p>利多卡因5-10%喷雾/乳膏、利多卡因/丙胺卡因喷雾（EMLA/Fortacin——欧洲获批早泄适应症）。</p>
+    <h4>用法要点</h4><p>性活动前5-20分钟涂于龟头及冠状沟区域。建议"应用-清洗"模式——起效后清洗掉再性交，以减少对伴侣的麻木影响。</p>
+    <h4>疗效数据</h4><p>RCT（n=150）：利多卡因5%喷雾×8周，AIPE评分、IELT、性交频率均显著优于安慰剂（p=0.0001）。头对头RCT：利多卡因10%喷雾IELT从22秒→179秒，达泊西汀60mg从22秒→63秒——利多卡因在IELT延长方面显著优于达泊西汀。</p>
+    <h4>副作用</h4><p>局部麻木感、烧灼感。女方阴道麻木（未清洗时）。少数患者因敏感度过低导致勃起困难。</p>
+    <h4>证据级别</h4><p>A级（多项RCT+荟萃分析+EMA批准）。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-type">激素</div>
+  <div class="card-title">睾酮补充疗法（TRT）</div>
+  <div class="card-body">仅适用于确诊性腺功能减退者。TRAVERSE试验证实不增加主要心血管事件，但需监测红细胞压积和PSA。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>适用条件</h4><p>仅适用于确诊的男性性腺功能减退——持续低血清睾酮（建议两次晨间检测），伴有临床症状：性欲减退、ED、精力下降、骨密度降低。</p>
+    <h4>不适用于</h4><p>"抗衰老"或健康男性的"提升"——无明确适应证者不应使用。</p>
+    <h4>已证实获益</h4><p>改善性功能（性欲、勃起）、改善情绪、增加骨密度、增加瘦体重、改善贫血。</p>
+    <h4>TRAVERSE试验（2023）</h4><p>n=5246，平均治疗22个月。TRT在主要MACE方面非劣于安慰剂（HR 0.96, 95% CI 0.78-1.17）。心律失常有升高信号（RR 1.53）。</p>
+    <h4>需监测</h4><p>红细胞增多症（Hct&lt;54%）、PSA、血脂。有血栓病史者慎用。有生育需求者禁用（外源性睾酮抑制精子生成）。</p>
+    <h4>证据级别</h4><p>A级（改善性功能/骨密度/贫血），心血管安全性A级（TRAVERSE试验）。</p>
+  </div></div>
+</div>
+
+<div class="card" onclick="openCardModal(this)" tabindex="0" role="button">
+  <div class="card-tag tag-type">营养</div>
+  <div class="card-title">营养补剂</div>
+  <div class="card-body">L-精氨酸有中等证据支持，抗氧化剂组合在荟萃分析中显示IIEF改善。玛卡、锌、DHEA证据不足。</div>
+  <div class="expand-panel"><div class="prose">
+    <h4>L-精氨酸（有证据）</h4><p>NO合成酶的底物，增加NO→血管舒张。荟萃分析（10项RCT）：改善勃起功能评分优于安慰剂。剂量差异大，通常每日1.5-5g。不应与西地那非联用（Mayo Clinic明确提醒）。证据级别B。</p>
+    <h4>抗氧化剂组合（有信号）</h4><p>2024年荟萃分析（23项RCT, n=1583）：抗氧化剂显著改善IIEF-EF评分（平均差5.5分）。人参、L-精氨酸、碧萝芷为主要成分。但局限：无法推荐具体产品和剂量。证据级别B。</p>
+    <h4>玛卡（证据弱）</h4><p>仅1项RCT（n=50）显示2400mg/日×12周IIEF改善+1.6分。系统性回顾结论"不足以建立与性功能改善的关系"。证据级别D。</p>
+    <h4>锌（无ED证据）</h4><p>大鼠实验显示提高性欲，但人体ED方面无任何RCT。</p>
+    <h4>DHEA（证据弱）</h4><p>早期研究对特定类型ED可能有效。高剂量或长期使用与癌症风险相关。证据级别D。</p>
+    <h4>市场现状</h4><p>意大利市场分析：80%的ED补剂产品被归入"无预期疗效"——多种成分混合但各剂量不足。</p>
+    <h4>证据级别总结</h4><p>L-精氨酸B级，抗氧化剂组合B级，人参C级，玛卡/DHEA/锌D级。</p>
+  </div></div>
+</div>
+
+</div>
+</div><!-- /herb-modern -->
+
+</div>
+
+<!-- /page-herb -->
+
+
+
+<!-- TECHNIQUE DETAIL MODAL (global, not inside any page) -->
+<div id="tech-modal" class="tech-modal" onclick="if(event.target===this)closeTechModal()" role="dialog" aria-modal="true" aria-label="技法详情">
+  <div class="tech-modal-content" id="tech-modal-content"></div>
+</div>
+
+<!-- COMPARE MODAL (global, not inside any page) -->
+<div id="compare-modal" class="compare-modal" onclick="if(event.target===this)closeCompare()" role="dialog" aria-modal="true" aria-label="体位对比">
+  <div class="compare-modal-content">
+    <div class="compare-head">
+      <h3>并排对比</h3>
+      <div class="compare-actions">
+      <button class="btn-mini" onclick="clearCompare()">清空</button>
+      <button class="compare-close" onclick="closeCompare()" aria-label="关闭对比">&times;</button>
+      </div>
+    </div>
+    <div class="compare-grid" id="compare-grid"></div>
+  </div>
+</div>
+
+</main><!-- /container -->
+
+<footer class="site-footer">
+  <p id="footer-quote"></p>
+</footer>
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script src="js/pose-images.js"></script>
+<script src="js/pose-images.local.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

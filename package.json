@@ -1,0 +1,11 @@
+{
+  "name": "fangzhongshu",
+  "version": "1.0.0",
+  "description": "Open-source knowledge dashboard on classical Chinese sexual cultivation (房中术)",
+  "scripts": {
+    "build": "node build.js",
+    "extract": "node scripts/extract.js"
+  },
+  "license": "MIT",
+  "private": false
+}
