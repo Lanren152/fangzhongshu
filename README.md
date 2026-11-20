@@ -67,6 +67,19 @@ build.js              # inlines src/ into dist/index.html
 scripts/extract.js    # one-time migration tool (single-file → src/)
 ```
 
+## Help wanted: visual assets
+
+This public build ships without the pose illustrations: the original silhouette set came from an unlicensed source and was removed. Text-only technique cards work, but a good diagram is what makes an unfamiliar position legible in two seconds.
+
+Anatomical schematic work needs equipment and skills that not everyone has — which is exactly why this is a community ask. If you can contribute any of the following, you are very welcome:
+
+- **Pose diagrams** — schematic silhouettes or line drawings for the 59 techniques. Abstract and neutral, an anatomy aid rather than an explicit image.
+- **Classical-style illustrations** — ink-line or woodblock-flavored drawings of herbs, figures, and scenes that match the existing public-domain artwork.
+- **Data visualizations** — the classical signal systems (四至, 九气, 五徵, 五欲, 十动) are plain tables today. Body maps, timelines, and interactive diagrams would carry them better.
+- **Accessibility variants** — high-contrast versions, reduced-motion stills, alt-text review.
+
+Requirements: your own work, or a license compatible with CC BY-SA 4.0. SVG, WebP, or PNG, following the design tokens in `src/css/main.css`. Integration: put files in `assets/img/poses/`, declare rights in the PR, and follow [assets/img/poses/README.md](assets/img/poses/README.md). If the output comes from a generative model, state the model and confirm you hold distribution rights. For a full set, open an Issue first (`Visual assets: …`) so we can agree on style before anyone draws 59 diagrams.
+
 ## Contributing
 
 Contributions are welcome — especially **content corrections with citations**. See [CONTRIBUTING.md](CONTRIBUTING.md).

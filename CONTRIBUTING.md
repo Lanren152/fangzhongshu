@@ -25,6 +25,15 @@ Rules of the design system (please don't break them):
 - Every interactive element: keyboard reachable, visible focus, ARIA label in Chinese.
 - Both themes (dark default / light) must keep WCAG AA contrast.
 
+## Visual assets
+
+The project ships text-only technique cards by default. See "Help wanted: visual assets" in the README for the kinds of contributions needed. Technical bar for illustrated contributions:
+
+- **Position diagrams.** Schematic, neutral, anatomy-chart style. Work at 1200×900 or larger; export WebP or SVG; background transparent or compatible with the theme surface. A diagram must still read at 300px wide (card thumbnail) and at 800px (detail modal). Name files after the `POSE_MAP` key they serve (`classic`, `sidekick`, `rider`, …) and wire them through `POSE_IMAGES` as described in `assets/img/poses/README.md`. Never ship them through `pose-images.local.js` — that file is for images you can use locally but not redistribute.
+- **Rights statement.** Every visual PR must state in its body which of these applies: (a) original work by you, (b) contributed under a named license (must be CC BY-SA 4.0-compatible), or (c) generated — include the model name, the date, and confirmation that you hold distribution rights for the output.
+- **Style boundary.** Diagrams must read as anatomical illustration, not explicit imagery. This is a GitHub content-policy requirement (the repository must stay within GitHub's Acceptable Use Policies), not a judgment on the subject matter.
+- **Batch process for large sets.** Open an Issue with 2–3 sample diagrams first. After style sign-off, submit in batches of about 10 so review stays possible. Diagram sets are reviewed for accuracy against the technique's operation notes, not just aesthetics.
+
 ## Testing a change
 
 ```bash
