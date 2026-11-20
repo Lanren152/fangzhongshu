@@ -73,6 +73,10 @@ npm run build        # 生成 dist/index.html（单文件）
 | `assets/img/art/` 的古画 | 公有领域（Wellcome Collection、Wikimedia Commons、《植物名实图考》） |
 | 体位剪影 | **不随仓库分发**。源图库无许可证，应用自动降级为纯文本。见 [assets/img/poses/README.md](assets/img/poses/README.md) |
 
+## 构建方式说明
+
+本项目在 AI 辅助下开发：代码、编辑结构与设计迭代由 Claude Code 完成，人工审校；内容初稿亦使用 DeepSeek 辅助。所有合入的改动都经过人工复核，事实性表述对照文献出处核查。欢迎以「审 AI 产出」的视角提交 Issue 和 PR——本项目希望成为 AI 辅助开源的一个可检验样本，不回避这一点。
+
 ## 免责声明
 
 本项目是关于历史医学文献的知识保存与教育项目，不构成医疗建议。古籍方剂可能含有违法、有毒或危险的物质，请勿擅自配制或服用。任何健康问题请咨询执业医师。

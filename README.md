@@ -101,6 +101,10 @@ Priority areas:
 | Classical artwork in `assets/img/art/` | Public domain (Wellcome Collection, Wikimedia Commons, 《植物名实图考》) — attribution notes in the app |
 | Pose silhouette images | **Not included.** The source image library carries no license; the app degrades gracefully to text-only. See [assets/img/poses/README.md](assets/img/poses/README.md) |
 
+## How this was built
+
+This project is developed with AI assistance: code, editorial restructuring, and design iterations produced with Claude Code and reviewed by a human maintainer; content drafting additionally used DeepSeek. Every merged change is human-reviewed, and factual claims are checked against cited sources. Issues and pull requests that audit AI-produced content are explicitly welcome — the project aims to be a usable public sample of AI-assisted open source, not to conceal the fact.
+
 ## Disclaimer
 
 This is a knowledge-preservation and education project about historical medical texts. Nothing here is medical advice. Classical formulas may contain substances that are illegal, toxic, or dangerous; do not prepare or consume them. Consult a licensed physician for any health concern.
